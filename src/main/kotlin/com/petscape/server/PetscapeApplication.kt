@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.api.RegisterResource
+import com.petscape.server.api.BossResource
 import com.petscape.server.auth.LoginAuthenticator
+import com.petscape.server.auth.User
 import com.petscape.server.models.Boss
-import com.petscape.server.models.User
 import io.dropwizard.Application
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter
 import io.dropwizard.setup.Bootstrap
@@ -22,7 +22,6 @@ import java.io.File
 
 const val DB_PETSCAPE = "petscape_db"
 const val COLLECTION_BOSSES = "bosses"
-const val COLLECTION_USERS = "users"
 
 @Throws(Exception::class)
 fun main(args: Array<String>) {
@@ -54,10 +53,11 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
     override fun run(configuration: PetscapeConfiguration, environment: Environment) {
         val auth = BasicCredentialAuthFilter.Builder<User>()
-            .setAuthenticator(LoginAuthenticator(database))
+            .setAuthenticator(LoginAuthenticator(database, configuration))
             .buildAuthFilter()
 
         environment.jersey().register(auth)
+        environment.jersey().register(BossResource(database))
 
 //        environment.healthChecks().register()
     }
