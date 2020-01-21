@@ -2,14 +2,17 @@ package com.petscape.server
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.mongodb.BasicDBList
-import com.mongodb.BasicDBObject
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
-import com.mongodb.util.JSON
+import com.petscape.server.api.BossResource
+import com.petscape.server.auth.PetscapeAuthenticator
+import com.petscape.server.auth.PetscapeAuthorizer
+import com.petscape.server.auth.User
 import com.petscape.server.models.Boss
 import io.dropwizard.Application
+import io.dropwizard.auth.AuthDynamicFeature
+import io.dropwizard.auth.basic.BasicCredentialAuthFilter
 import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.bson.codecs.configuration.CodecRegistries
@@ -19,8 +22,8 @@ import org.slf4j.LoggerFactory
 import java.io.File
 
 
-const val PETSCAPE_DB = "petscape_db"
-const val BOSSES_COLLECTION = "bosses"
+const val DB_PETSCAPE = "petscape_db"
+const val COLLECTION_BOSSES = "bosses"
 
 @Throws(Exception::class)
 fun main(args: Array<String>) {
@@ -45,19 +48,26 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         )
 
         val mongoClient = MongoClients.create()
-        database = mongoClient.getDatabase(PETSCAPE_DB).withCodecRegistry(pojoCodecRegistry)
+        database = mongoClient.getDatabase(DB_PETSCAPE).withCodecRegistry(pojoCodecRegistry)
 
         seedDb()
-
     }
 
     override fun run(configuration: PetscapeConfiguration, environment: Environment) {
+        val auth = BasicCredentialAuthFilter.Builder<User>()
+            .setAuthenticator(PetscapeAuthenticator(database, configuration))
+            .setAuthorizer(PetscapeAuthorizer())
+            .setRealm("Authentication")
+            .buildAuthFilter()
+
+        environment.jersey().register(AuthDynamicFeature(auth))
+        environment.jersey().register(BossResource(database))
+
 //        environment.healthChecks().register()
-//        environment.jersey().register(Resource())
     }
 
-    fun seedDb() {
-        val bossCollection = database.getCollection(BOSSES_COLLECTION, Boss::class.java)
+    private fun seedDb() {
+        val bossCollection = database.getCollection(COLLECTION_BOSSES, Boss::class.java)
         val file = File(javaClass.classLoader.getResource("initial_data.json")?.file ?: "")
         val bosses = ObjectMapper().readValue(file, object : TypeReference<List<Boss>>() {})
 
