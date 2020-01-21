@@ -2,7 +2,8 @@ package com.petscape.server.models
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class Drop(
-    val item: String,
-    @JsonProperty(value = "drop_rate") val dropRate: Int
-)
+class Drop {
+    lateinit var item: String
+    lateinit var file: String
+    @JsonProperty(value = "drop_rate") var dropRate = 0
+}

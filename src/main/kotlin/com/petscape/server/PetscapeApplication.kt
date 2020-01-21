@@ -53,10 +53,11 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
     fun seedDb() {
         val bossCollection = database.getCollection(BOSSES_COLLECTION)
-        if (bossCollection.countDocuments() == 0L) {
-            val file = File(javaClass.classLoader.getResource("initial_data.json").file)
+//        if (bossCollection.countDocuments() == 0L) {
+            val file = File(javaClass.classLoader.getResource("initial_data.json")?.file ?: "")
             val bosses = ObjectMapper().readValue(file, object : TypeReference<List<Boss>>() {})
-            bossCollection.insertMany(bosses)
-        }
+        print(bosses.size)
+//            bossCollection.insertMany(bosses)
+//        }
     }
 }
