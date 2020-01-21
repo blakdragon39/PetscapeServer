@@ -14,6 +14,8 @@ import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.bson.codecs.configuration.CodecRegistries
 import org.bson.codecs.pojo.PojoCodecProvider
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import java.io.File
 
 
@@ -27,6 +29,7 @@ fun main(args: Array<String>) {
 
 class PetscapeApplication : Application<PetscapeConfiguration>() {
 
+    lateinit var logger: Logger
     lateinit var database: MongoDatabase
 
     override fun getName(): String {
@@ -34,6 +37,8 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
     }
 
     override fun initialize(bootstrap: Bootstrap<PetscapeConfiguration?>) {
+        logger = LoggerFactory.getLogger(javaClass.name)
+
         val pojoCodecRegistry = CodecRegistries.fromRegistries(
             MongoClientSettings.getDefaultCodecRegistry(),
             CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())
@@ -52,12 +57,11 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
     }
 
     fun seedDb() {
-        val bossCollection = database.getCollection(BOSSES_COLLECTION)
-//        if (bossCollection.countDocuments() == 0L) {
-            val file = File(javaClass.classLoader.getResource("initial_data.json")?.file ?: "")
-            val bosses = ObjectMapper().readValue(file, object : TypeReference<List<Boss>>() {})
-        print(bosses.size)
-//            bossCollection.insertMany(bosses)
-//        }
+        val bossCollection = database.getCollection(BOSSES_COLLECTION, Boss::class.java)
+        val file = File(javaClass.classLoader.getResource("initial_data.json")?.file ?: "")
+        val bosses = ObjectMapper().readValue(file, object : TypeReference<List<Boss>>() {})
+
+        bossCollection.drop()
+        bossCollection.insertMany(bosses)
     }
 }
