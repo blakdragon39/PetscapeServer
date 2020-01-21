@@ -7,8 +7,8 @@ import io.dropwizard.auth.basic.BasicCredentials
 import org.eclipse.jetty.server.Authentication
 import java.util.*
 
-class LoginAuthenticator(private val db: MongoDatabase,
-                         private val config: PetscapeConfiguration) : Authenticator<BasicCredentials, User> {
+class PetscapeAuthenticator(private val db: MongoDatabase,
+                            private val config: PetscapeConfiguration) : Authenticator<BasicCredentials, User> {
 
     override fun authenticate(credentials: BasicCredentials?): Optional<User> {
         return if (config.username == credentials?.username && config.password == credentials?.password) {
