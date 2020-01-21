@@ -1,31 +1,42 @@
 package com.petscape.server.api
 
-import com.mongodb.client.MongoCollection
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.COLLECTION_BOSSES
-import com.petscape.server.models.Boss
+import com.petscape.server.models.BingoGame
+import com.petscape.server.models.BingoGameType
 import javax.annotation.security.PermitAll
-import javax.ws.rs.GET
-import javax.ws.rs.Path
-import javax.ws.rs.Produces
+import javax.validation.constraints.NotEmpty
+import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
+import javax.ws.rs.core.Response
 
-@Path("/bosses")
+@Path("/bingo/new_game")
 @Produces(MediaType.APPLICATION_JSON)
 @PermitAll
-class BossResource(private val db: MongoDatabase) {
+class NewBingoGameResource(private val db: MongoDatabase) {
 
-    @GET
-    fun getBosses(): BossResponse {
-        val bosses = db.getCollection(COLLECTION_BOSSES, Boss::class.java)
-        return BossResponse(bosses.toList())
+    @POST
+    fun createBingoGame(
+        @QueryParam("name") @NotEmpty name: String,
+        @QueryParam("type") @NotEmpty type: String,
+        @QueryParam("cards_match") cardsMatch: Boolean = false
+    ): BingoGame {
+        validateType(type)
+
+        val game = BingoGame()
+        game.name = name
+        game.cards = emptyList()
+        game.type = BingoGameType.valueOf(type)
+
+        //todo if cards match, generate parent card
+
+        return game
     }
-}
 
-class BossResponse(val bosses: List<Boss>)
-
-fun <T> MongoCollection<T>.toList(): List<T> {
-    val list = mutableListOf<T>()
-    find().forEach { list.add(it) }
-    return list
+    private fun validateType(type: String) {
+        return when (type) {
+            BingoGameType.BOSSES.toString() -> Unit
+            BingoGameType.ITEMS.toString() -> Unit
+            else -> throw WebApplicationException("type must be one of BOSSES or ITEMS", Response.Status.BAD_REQUEST)
+        }
+    }
 }
