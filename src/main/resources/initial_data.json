@@ -1,0 +1,859 @@
+[
+  {
+    "name": "Abyssal Sire",
+    "file": "abyssal_sire.png",
+    "wilderness": false,
+    "slayer_level": 85,
+    "drops": [
+      {
+        "item": "Abyssal Bludgeon",
+        "file": "abyssal_bludgeon.png",
+        "drop_rate": 206
+      },
+      {
+        "item": "Abyssal Dagger",
+        "file": "abyssal_dagger.png",
+        "drop_rate": 492
+      },
+      {
+        "item": "Abyssal Head",
+        "file": "abyssal_head.png",
+        "drop_rate": 1280
+      },
+      {
+        "item": "Abyssal Whip",
+        "file": "abyssal_whip.png",
+        "drop_rate": 1066
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 180
+      },
+      {
+        "item": "Jar of Miasma",
+        "file": "TODO",
+        "drop_rate": 984
+      },
+      {
+        "item": "Abyssal Orphan",
+        "file": "TODO",
+        "drop_rate": 2560
+      }
+    ]
+  },
+  {
+    "name": "Alchemical Hydra",
+    "file": "alchemical_hydra.png",
+    "wilderness": false,
+    "slayer_level": 95,
+    "drops": [
+      {
+        "item": "Alchemical Hydra Heads",
+        "file": "alchemical_hydra_heads.png",
+        "drop_rate": 256
+      },
+      {
+        "item": "Brimstone Ring",
+        "file": "brimstone_ring.png",
+        "drop_rate": 180
+      },
+      {
+        "item": "Hydra Leather",
+        "file": "hydra_leather.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Hydra Tail",
+        "file": "hydra_tail.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Hydra's Claw",
+        "file": "hydras_claw.png",
+        "drop_rate": 1000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 256
+      },
+      {
+        "item": "Jar of Chemicals",
+        "file": "TODO",
+        "drop_rate": 2000
+      },
+      {
+        "item": "Ikkle Hydra",
+        "file": "TODO",
+        "drop_rate": 3000
+      }
+    ]
+  },
+  {
+    "name": "Callisto",
+    "file": "callisto.png",
+    "wilderness": true,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Tyrannical Ring",
+        "file": "tyrannical_ring.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Dragon 2h Sword",
+        "file": "dragon_2h_sword.png",
+        "drop_rate": 256
+      },
+      {
+        "item": "Dragon Pickaxe",
+        "file": "dragon_pickaxe.png",
+        "drop_rate": 171
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 100
+      },
+      {
+        "item": "Callisto Cub",
+        "file": "TODO",
+        "drop_rate": 2000
+      }
+    ]
+  },
+  {
+    "name": "Cerberus",
+    "file": "cerberus.png",
+    "wilderness": false,
+    "slayer_level": 91,
+    "drops": [
+      {
+        "item": "Primordial Crystal",
+        "file": "primordial_crystal.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Pegasian Crystal",
+        "file": "pegasian_crystal.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Eternal Crystal",
+        "file": "eternal_crystal.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Smouldering Stone",
+        "file": "smouldering_stone.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 100
+      },
+      {
+        "item": "Jar of Souls",
+        "file": "TODO",
+        "drop_rate": 2000
+      },
+      {
+        "item": "Hellpuppy",
+        "file": "TODO",
+        "drop_rate": 3000
+      }
+    ]
+  },
+  {
+    "name": "Chaos Elemental",
+    "file": "chaos_elemental.png",
+    "wilderness": true,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Dragon 2h Sword",
+        "file": "dragon_2h_sword.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Dragon Pickaxe",
+        "file": "dragon_pickaxe.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 200
+      },
+      {
+        "item": "Pet Chaos Elemental",
+        "file": "TODO",
+        "drop_rate": 300
+      }
+    ]
+  },
+  {
+    "name": "Commander Zilyana",
+    "file": "zilyana.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Saradomin Hilt",
+        "file": "saradomin_hilt.png",
+        "drop_rate": 508
+      },
+      {
+        "item": "Saradomin Sword",
+        "file": "saradomin_sword.png",
+        "drop_rate": 127
+      },
+      {
+        "item": "Armadyl Crossbow",
+        "file": "armadyl_crossbow.png",
+        "drop_rate": 508
+      },
+      {
+        "item": "Saradomin's Light",
+        "file": "saradomins_light.png",
+        "drop_rate": 254
+      },
+      {
+        "item": "Zilyana Jr.",
+        "file": "zilyana_jr.png",
+        "drop_rate": 5000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 250
+      }
+    ]
+  },
+  {
+    "name": "Corporeal Beast",
+    "file": "corporeal_beast.webp",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 200
+      },
+      {
+        "item": "Arcane Sigil",
+        "file": "arcane_sigil.png",
+        "drop_rate": 1365
+      },
+      {
+        "item": "Elysian Sigil",
+        "file": "elysian_sigil.webp",
+        "drop_rate": 4095
+      },
+      {
+        "item": "Holy Elixir",
+        "file": "holy_elixir.png",
+        "drop_rate": 170
+      },
+      {
+        "item": "Pet Dark Core",
+        "file": "pet_dark_core.png",
+        "drop_rate": 5000
+      },
+      {
+        "item": "Spectral Sigil",
+        "file": "spectral_sigil.webp",
+        "drop_rate": 1365
+      },
+      {
+        "item": "Spirit Shield",
+        "file": "spirit_shield.webp",
+        "drop_rate": 64
+      }
+    ]
+  },
+  {
+    "name": "Dagannoth Prime",
+    "file": "dagannoth_prime.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Seers Ring",
+        "file": "seers_ring.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Mud Battlestaff",
+        "file": "mud_battlestaff.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Dragon Axe",
+        "file": "dragon_axe.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 750
+      },
+      {
+        "item": "Dagannoth Prime Jr.",
+        "file": "dagannoth_prime_jr.png",
+        "drop_rate": 5000
+      }
+    ]
+  },
+  {
+    "name": "Dagannoth Rex",
+    "file": "dagannoth_rex.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Warrior Ring",
+        "file": "warrior_ring.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Berserker Ring",
+        "file": "berserker_ring.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Dragon Axe",
+        "file": "dragon_axe.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 750
+      },
+      {
+        "item": "Dagannoth Rex Jr.",
+        "file": "dagannoth_rex_jr.png",
+        "drop_rate": 5000
+      }
+    ]
+  },
+  {
+    "name": "Dagannoth Supreme",
+    "file": "dagannoth_supreme.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Seercull",
+        "file": "seercull.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Archers Ring",
+        "file": "archers_ring.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Dragon Axe",
+        "file": "dragon_axe.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 750
+      },
+      {
+        "item": "Dagannoth Supreme Jr.",
+        "file": "dagannoth_supreme_jr.png",
+        "drop_rate": 5000
+      }
+    ]
+  },
+  {
+    "name": "General Graardor",
+    "file": "graardor.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Bandos Hilt",
+        "file": "bandos_hilt.png",
+        "drop_rate": 508
+      },
+      {
+        "item": "Bandos Boots",
+        "file": "bandos_boots.png",
+        "drop_rate": 384
+      },
+      {
+        "item": "Bandos Chestplate",
+        "file": "bandos_chestplate.png",
+        "drop_rate": 384
+      },
+      {
+        "item": "Bandos Tassets",
+        "file": "bandos_tassets.png",
+        "drop_rate": 384
+      },
+      {
+        "item": "General Graardor Jr.",
+        "file": "general_graardor_jr.png",
+        "drop_rate": 5000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 250
+      }
+    ]
+  },
+  {
+    "name": "Grotesque Guardians",
+    "file": "grotesque_guardians.png",
+    "wilderness": false,
+    "slayer_level": 75,
+    "drops": [
+      {
+        "item": "Granite Gloves",
+        "file": "granite_gloves.png",
+        "drop_rate": 500
+      },
+      {
+        "item": "Granite Ring",
+        "file": "granite_ring.png",
+        "drop_rate": 500
+      },
+      {
+        "item": "Black Tourmaline Core",
+        "file": "black_tourmaline_core.png",
+        "drop_rate": 1000
+      },
+      {
+        "item": "Granite Hammer",
+        "file": "granite_hammer.png",
+        "drop_rate": 750
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 230
+      },
+      {
+        "item": "Jar of Stone",
+        "file": "TODO",
+        "drop_rate": 5000
+      },
+      {
+        "item": "Noon",
+        "file": "TODO",
+        "drop_rate": 3000
+      }
+    ]
+  },
+  {
+    "name": "Kalphite Queen",
+    "file": "kalphite_queen.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Dragon Chainbody",
+        "file": "dragon_chainbody.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Dragon 2h Sword",
+        "file": "dragon_2h_sword.png",
+        "drop_rate": 256
+      },
+      {
+        "item": "KQ Head",
+        "file": "kq_head.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Kalphite Princess",
+        "file": "kalphite_princess.png",
+        "drop_rate": 3000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 100
+      },
+      {
+        "item": "Jar of Sand",
+        "file": "jar_of_sand.png",
+        "drop_rate": "2000"
+      }
+    ]
+  },
+  {
+    "name": "King Black Dragon",
+    "file": "king_black_dragon.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Dragon Pickaxe",
+        "file": "dragon_pickaxe.png",
+        "drop_rate": 1500
+      },
+      {
+        "item": "KBD Heads",
+        "file": "kbd_heads.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 450
+      },
+      {
+        "item": "Prince Black Dragon",
+        "file": "prince_black_dragon.webp",
+        "drop_rate": 3000
+      },
+      {
+        "item": "Draconic Visage",
+        "file": "draconic_visage.png",
+        "drop_rate": 5000
+      }
+    ]
+  },
+  {
+    "name": "Kraken",
+    "file": "kraken.png",
+    "wilderness": false,
+    "slayer_level": 87,
+    "drops": [
+      {
+        "item": "Kraken Tentacle",
+        "file": "kraken_tentacle.png",
+        "drop_rate": 300
+      },
+      {
+        "item": "Trident of the Seas",
+        "file": "trident_of_the_seas.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 500
+      },
+      {
+        "item": "Jar of Dirt",
+        "file": "TODO",
+        "drop_rate": 1000
+      },
+      {
+        "item": "Pet Kraken",
+        "file": "TODO",
+        "drop_rate": 3000
+      }
+    ]
+  },
+  {
+    "name": "Kree'Arra",
+    "file": "kreearra.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Armadyl Hilt",
+        "file": "armadyl_hilt.png",
+        "drop_rate": 508
+      },
+      {
+        "item": "Armadyl Helmet",
+        "file": "armadyl_helmet.png",
+        "drop_rate": 508
+      },
+      {
+        "item": "Armadyl Chestplate",
+        "file": "armadyl_chestplate.png",
+        "drop_rate": 384
+      },
+      {
+        "item": "Armadyl Chainskirt",
+        "file": "armadyl_chainskirt.png",
+        "drop_rate": 384
+      },
+      {
+        "item": "Kree'Arra Jr.",
+        "file": "kree_arra_jr.webp",
+        "drop_rate": 5000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 250
+      }
+    ]
+  },
+  {
+    "name": "Kril Tsutsaroth",
+    "file": "kril_tsutsaroth.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Staff of the Dead",
+        "file": "staff_of_the_dead.png",
+        "drop_rate": 508
+      },
+      {
+        "item": "Zamorak Hilt",
+        "file": "zamorak_hilt.png",
+        "drop_rate": 508
+      },
+      {
+        "item": "Steam Battlestaff",
+        "file": "steam_battlestaff.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Zamorakian Spear",
+        "file": "zamorakian_spear.png",
+        "drop_rate": 128
+      },
+      {
+        "item": "Kril Tsutsaroth Jr.",
+        "file": "kril_tsutsaroth_jr.png",
+        "drop_rate": 5000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 250
+      }
+    ]
+  },
+  {
+    "name": "Sarachnis",
+    "file": "sarachnis.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Jar of Eyes",
+        "file": "jar_of_eyes.png",
+        "drop_rate": 0
+      },
+      {
+        "item": "Sarachnis Cudgel",
+        "file": "sarachnis_cudgel.webp",
+        "drop_rate": 0
+      },
+      {
+        "item": "Sraracha",
+        "file": "sraracha.png",
+        "drop_rate": 0
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 0
+      }
+    ]
+  },
+  {
+    "name": "Scorpia",
+    "file": "scorpia.png",
+    "wilderness": true,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Malediction Shard 3",
+        "file": "malediction_shard_3.png",
+        "drop_rate": 256
+      },
+      {
+        "item": "Odium Shard 3",
+        "file": "odium_shard_3.png",
+        "drop_rate": 256
+      },
+      {
+        "item": "Scorpia's Offspring",
+        "file": "scorpias_offspring.png",
+        "drop_rate": 2000
+      }
+    ]
+  },
+  {
+    "name": "Thermonuclear Smoke Devil",
+    "file": "thermonuclear_smoke_devil.png",
+    "wilderness": false,
+    "slayer_level": 93,
+    "drops": [
+      {
+        "item": "Smoke Battlestaff",
+        "file": "smoke_battlestaff.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Occult Necklace",
+        "file": "occult_necklace.png",
+        "drop_rate": 350
+      },
+      {
+        "item": "Dragon Chainbody",
+        "file": "dragon_chainbody.png",
+        "drop_rate": 2000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 500
+      },
+      {
+        "item": "Pet Smoke Devil",
+        "file": "TODO",
+        "drop_rate": 3000
+      }
+    ]
+  },
+  {
+    "name": "Venenatis",
+    "file": "venenatis.png",
+    "wilderness": true,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Treasonous Ring",
+        "file": "treasonous_ring.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Dragon 2h Sword",
+        "file": "dragon_2h_sword.png",
+        "drop_rate": 256
+      },
+      {
+        "item": "Dragon Pickaxe",
+        "file": "dragon_pickaxe.png",
+        "drop_rate": 171
+      },
+      {
+        "item": "Venenatis Spiderling",
+        "file": "venenatis_spiderling.png",
+        "drop_rate": 2000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 100
+      }
+    ]
+  },
+  {
+    "name": "Vet'ion",
+    "file": "vetion.png",
+    "wilderness": true,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Ring of the Gods",
+        "file": "ring_of_the_gods.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Dragon 2h Sword",
+        "file": "dragon_2h_sword.png",
+        "drop_rate": 256
+      },
+      {
+        "item": "Dragon Pickaxe",
+        "file": "dragon_pickaxe.png",
+        "drop_rate": 171
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 100
+      },
+      {
+        "item": "Vet'ion Jr.",
+        "file": "TODO",
+        "drop_rate": 2000
+      }
+    ]
+  },
+  {
+    "name": "Vorkath",
+    "file": "vorkath.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Dragonbone Necklace",
+        "file": "dragonbone_necklace.png",
+        "drop_rate": 1000
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 65
+      },
+      {
+        "item": "Jar of Decay",
+        "file": "TODO",
+        "drop_rate": 3000
+      },
+      {
+        "item": "Vorki",
+        "file": "TODO",
+        "drop_rate": 3000
+      }
+    ]
+  },
+  {
+    "name": "Zulrah",
+    "file": "zulrah.png",
+    "wilderness": false,
+    "slayer_level": 0,
+    "drops": [
+      {
+        "item": "Uncut Onyx",
+        "file": "uncut_onyx.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Tanzanite Fang",
+        "file": "tanzanite_fang.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Magic Fang",
+        "file": "magic_fang.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Serpentine Visage",
+        "file": "serpentine_visage.png",
+        "drop_rate": 512
+      },
+      {
+        "item": "Clue Scroll (Elite)",
+        "file": "clue_scroll_elite.png",
+        "drop_rate": 75
+      },
+      {
+        "item": "Jar of Swamp",
+        "file": "TODO",
+        "drop_rate": 3000
+      },
+      {
+        "item": "Pet snakeling",
+        "file": "TODO",
+        "drop_rate": 4000
+      }
+    ]
+  }
+]
