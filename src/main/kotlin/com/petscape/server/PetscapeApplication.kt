@@ -33,7 +33,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
     }
 
     override fun run(configuration: PetscapeConfiguration, environment: Environment) {
-        environment.healthChecks().register()
+//        environment.healthChecks().register()
         environment.jersey().register(HelloWorldResource(configuration.template, configuration.defaultName))
     }
 }
