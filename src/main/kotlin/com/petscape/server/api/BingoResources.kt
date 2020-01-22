@@ -12,6 +12,7 @@ import javax.ws.rs.core.Response
 import kotlin.random.Random
 
 private const val NUM_SQUARES = 25
+private const val FREE_SQUARE = 12
 
 @Path("/bingo/new_game")
 @Produces(MediaType.APPLICATION_JSON)
@@ -62,6 +63,10 @@ class NewCustomBingoGameResource(private val db: MongoDatabase) {
     }
 }
 
+// todo Resource: add card to game
+// todo using parent card
+// todo using random card
+
 private fun validateType(type: String) {
     val validTypes = listOf(BingoGameType.BOSSES, BingoGameType.ITEMS, BingoGameType.COMBINED)
     if (validTypes.none { it.toString() == type })
@@ -73,6 +78,7 @@ private fun generateSquares(db: MongoDatabase, type: BingoGameType, freeSpace: B
     val choices = getSquareChoices(db, type).toMutableList()
 
     for (i in 0 until NUM_SQUARES) {
+        //todo check if free square
         val index = Random.Default.nextInt(choices.size)
         val choice = if (type != BingoGameType.BOSSES) choices.removeAt(index) else choices[index]
         val square = BingoSquare()
@@ -81,10 +87,11 @@ private fun generateSquares(db: MongoDatabase, type: BingoGameType, freeSpace: B
             BingoGameType.BOSSES -> square.boss = choice as LiteBoss
             BingoGameType.ITEMS -> square.item = choice as Drop
             BingoGameType.COMBINED -> {
-                val pair = choice as Pair<LiteBoss, Drop>
-                square.boss = pair.first
-                square.item = pair.second
+                val pair = choice as Pair<*, *>
+                square.boss = pair.first as LiteBoss
+                square.item = pair.second as Drop
             }
+            else -> Unit
         }
 
         squares.add(square)

@@ -15,6 +15,12 @@ class BingoCard {
 }
 
 class BingoSquare {
+    companion object {
+        val FreeSquare = BingoSquare().apply {
+            completed = true
+        }
+    }
+
     var boss: LiteBoss? = null
     var item: Drop? = null
     var task: String? = null
