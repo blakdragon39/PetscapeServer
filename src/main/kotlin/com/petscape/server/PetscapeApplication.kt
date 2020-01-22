@@ -6,6 +6,7 @@ import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.api.NewBingoGameResource
+import com.petscape.server.api.NewCustomBingoGameResource
 import com.petscape.server.auth.PetscapeAuthenticator
 import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
@@ -24,6 +25,7 @@ import java.io.File
 
 const val DB_PETSCAPE = "petscape_db"
 const val COLLECTION_BOSSES = "bosses"
+const val COLLECTION_BINGO_GAMES = "bingo_games"
 
 @Throws(Exception::class)
 fun main(args: Array<String>) {
@@ -62,6 +64,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
         environment.jersey().register(AuthDynamicFeature(auth))
         environment.jersey().register(NewBingoGameResource(database))
+        environment.jersey().register(NewCustomBingoGameResource(database))
 
 //        environment.healthChecks().register()
     }

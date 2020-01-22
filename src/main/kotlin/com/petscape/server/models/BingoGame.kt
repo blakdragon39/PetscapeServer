@@ -4,8 +4,9 @@ class BingoGame {
     var name: String? = null
     var cards: List<BingoCard> = emptyList()
     var type = BingoGameType.OTHER
+    var freeSpace = true
 
-    var parentCard: BingoCard? = null //if it exists, all new cards used this as a template
+    var parentCard: List<BingoSquare>? = null //if it exists, all new cards use this as a template
 }
 
 class BingoCard {
@@ -14,8 +15,10 @@ class BingoCard {
 }
 
 class BingoSquare {
-    var task: Any? = null //Boss, Drop, or String
+    var boss: LiteBoss? = null
+    var item: Drop? = null
+    var task: String? = null
     var completed = false
 }
 
-enum class BingoGameType { BOSSES, ITEMS, OTHER }
+enum class BingoGameType { BOSSES, ITEMS, COMBINED, OTHER }
