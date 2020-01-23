@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.api.BossResource
+import com.petscape.server.api.NewBingoGameResource
+import com.petscape.server.api.NewCustomBingoGameResource
 import com.petscape.server.auth.PetscapeAuthenticator
 import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
@@ -24,6 +25,7 @@ import java.io.File
 
 const val DB_PETSCAPE = "petscape_db"
 const val COLLECTION_BOSSES = "bosses"
+const val COLLECTION_BINGO_GAMES = "bingo_games"
 
 @Throws(Exception::class)
 fun main(args: Array<String>) {
@@ -32,8 +34,8 @@ fun main(args: Array<String>) {
 
 class PetscapeApplication : Application<PetscapeConfiguration>() {
 
-    lateinit var logger: Logger
-    lateinit var database: MongoDatabase
+    private lateinit var logger: Logger
+    private lateinit var database: MongoDatabase
 
     override fun getName(): String {
         return "petscape-server"
@@ -61,7 +63,8 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
             .buildAuthFilter()
 
         environment.jersey().register(AuthDynamicFeature(auth))
-        environment.jersey().register(BossResource(database))
+        environment.jersey().register(NewBingoGameResource(database))
+        environment.jersey().register(NewCustomBingoGameResource(database))
 
 //        environment.healthChecks().register()
     }
