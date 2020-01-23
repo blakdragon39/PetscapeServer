@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
+import com.petscape.server.api.AddBingoCardResource
 import com.petscape.server.api.NewBingoGameResource
 import com.petscape.server.api.NewCustomBingoGameResource
 import com.petscape.server.auth.PetscapeAuthenticator
@@ -18,6 +19,7 @@ import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.bson.codecs.configuration.CodecRegistries
 import org.bson.codecs.pojo.PojoCodecProvider
+import org.mongojack.JacksonCodecRegistry
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -65,6 +67,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(AuthDynamicFeature(auth))
         environment.jersey().register(NewBingoGameResource(database))
         environment.jersey().register(NewCustomBingoGameResource(database))
+        environment.jersey().register(AddBingoCardResource(database))
 
 //        environment.healthChecks().register()
     }
