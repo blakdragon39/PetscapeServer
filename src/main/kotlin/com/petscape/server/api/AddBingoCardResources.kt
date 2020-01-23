@@ -5,11 +5,9 @@ import com.petscape.server.COLLECTION_BINGO_GAMES
 import com.petscape.server.models.BingoCard
 import com.petscape.server.models.BingoGame
 import com.petscape.server.utils.generateSquares
-import org.litote.kmongo.eq
-import org.litote.kmongo.findOne
+import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById
 import org.litote.kmongo.replaceOneById
-import org.litote.kmongo.util.idValue
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotEmpty
 import javax.ws.rs.*
@@ -23,7 +21,7 @@ class AddBingoCardResource(private val db: MongoDatabase) {
 
     @POST
     fun addBingoCard(
-        @QueryParam("id") @NotEmpty gameId: String,
+        @QueryParam("id") gameId: ObjectId,
         @QueryParam("name") @NotEmpty username: String
     ) : BingoCard {
         val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)

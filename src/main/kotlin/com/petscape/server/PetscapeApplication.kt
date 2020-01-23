@@ -19,7 +19,6 @@ import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.bson.codecs.configuration.CodecRegistries
 import org.bson.codecs.pojo.PojoCodecProvider
-import org.mongojack.JacksonCodecRegistry
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
