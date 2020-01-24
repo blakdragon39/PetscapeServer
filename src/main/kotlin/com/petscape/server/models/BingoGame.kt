@@ -1,12 +1,10 @@
 package com.petscape.server.models
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
-import org.omg.CORBA.Object
-import java.util.*
 
 class BingoGame {
-    @JsonProperty("id") var _id = ObjectId()
+    @BsonId var id = ObjectId()
     var name: String? = null
     var cards: MutableList<BingoCard> = mutableListOf()
     var type = BingoGameType.OTHER
@@ -16,7 +14,7 @@ class BingoGame {
 }
 
 class BingoCard {
-    @JsonProperty("id") var _id = ObjectId()
+    @BsonId var id = ObjectId()
     var username: String? = null
     var squares: List<BingoSquare>? = null
 }
@@ -28,7 +26,7 @@ class BingoSquare {
         }
     }
 
-    @JsonProperty("id") var _id = ObjectId()
+    @BsonId var id = ObjectId()
     var boss: LiteBoss? = null
     var item: Drop? = null
     var task: String? = null

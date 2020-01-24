@@ -2,7 +2,8 @@ package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
-import com.petscape.server.models.*
+import com.petscape.server.models.BingoGame
+import com.petscape.server.models.BingoGameType
 import com.petscape.server.utils.generateSquares
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotEmpty
