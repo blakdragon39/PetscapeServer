@@ -5,14 +5,14 @@ import com.petscape.server.COLLECTION_BOSSES
 import com.petscape.server.models.*
 import kotlin.random.Random
 
-private const val NUM_SQUARES = 25
+const val BINGO_NUM_SQUARES = 25
 private const val FREE_SQUARE = 12
 
 fun generateSquares(db: MongoDatabase, type: BingoGameType, freeSpace: Boolean): List<BingoSquare> {
     val squares = mutableListOf<BingoSquare>()
     val choices = getSquareChoices(db, type).toMutableList()
 
-    for (i in 0 until NUM_SQUARES) {
+    for (i in 0 until BINGO_NUM_SQUARES) {
         val square = if (freeSpace && i == FREE_SQUARE) {
             BingoSquare.FreeSquare
         } else {
@@ -41,13 +41,11 @@ fun generateSquares(db: MongoDatabase, type: BingoGameType, freeSpace: Boolean):
 }
 
 private fun getSquareChoices(db: MongoDatabase, type: BingoGameType): List<Any> {
-    val bosses = db.getCollection(COLLECTION_BOSSES, Boss::class.java).find().toList()
+    val bosses = getBosses(db)
 
     return when (type) {
         BingoGameType.BOSSES -> bosses.map { it.toLiteBoss() }
-        BingoGameType.ITEMS -> {
-            bosses.flatMap { it.drops }
-        }
+        BingoGameType.ITEMS -> getItems(bosses)
         BingoGameType.COMBINED -> {
             return bosses.flatMap { boss ->
                 boss.drops.map { drop ->
@@ -57,4 +55,13 @@ private fun getSquareChoices(db: MongoDatabase, type: BingoGameType): List<Any> 
         }
         else -> emptyList()
     }
+}
+
+fun getBosses(db: MongoDatabase): List<Boss> {
+    return db.getCollection(COLLECTION_BOSSES, Boss::class.java).find().toList()
+}
+
+fun getItems(bosses: List<Boss>): List<Drop> {
+    val items = bosses.flatMap { it.drops }
+    return items.distinctBy(Drop::item)
 }

@@ -1,5 +1,6 @@
 package com.petscape.server.models
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
 
@@ -34,3 +35,9 @@ class BingoSquare {
 }
 
 enum class BingoGameType { BOSSES, ITEMS, COMBINED, OTHER }
+
+class CustomSquare {
+    @JsonProperty(required = false) var boss: String? = null
+    @JsonProperty(required = false) var item: String? = null
+    @JsonProperty(required = false) var task: String? = null
+}
