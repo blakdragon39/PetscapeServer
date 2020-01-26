@@ -10,9 +10,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.api.AddBingoCardResource
-import com.petscape.server.api.NewBingoGameResource
-import com.petscape.server.api.NewCustomBingoGameResource
+import com.petscape.server.api.*
 import com.petscape.server.auth.PetscapeAuthenticator
 import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
@@ -83,6 +81,8 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(NewBingoGameResource(database))
         environment.jersey().register(NewCustomBingoGameResource(database))
         environment.jersey().register(AddBingoCardResource(database))
+        environment.jersey().register(CompleteSquareResource(database))
+        environment.jersey().register(UpdateNotesResource(database))
 
         val serializersModule = SimpleModule("serializers", Version.unknownVersion())
             .addSerializer(objectIdSerializer)

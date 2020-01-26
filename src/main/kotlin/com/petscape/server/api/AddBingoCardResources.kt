@@ -10,6 +10,7 @@ import org.litote.kmongo.findOneById
 import org.litote.kmongo.replaceOneById
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotEmpty
+import javax.validation.constraints.NotNull
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
@@ -21,7 +22,7 @@ class AddBingoCardResource(private val db: MongoDatabase) {
 
     @POST
     fun addBingoCard(
-        @QueryParam("id") gameId: ObjectId,
+        @QueryParam("id") @NotNull gameId: ObjectId,
         @QueryParam("name") @NotEmpty username: String
     ) : BingoCard {
         val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)

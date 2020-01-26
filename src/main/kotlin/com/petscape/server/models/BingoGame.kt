@@ -18,6 +18,7 @@ class BingoCard {
     @BsonId var id = ObjectId()
     var username: String? = null
     var squares: List<BingoSquare>? = null
+    var notes = ""
 }
 
 class BingoSquare {
