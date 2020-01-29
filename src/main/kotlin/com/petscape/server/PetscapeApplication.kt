@@ -1,12 +1,16 @@
 package com.petscape.server
 
+import com.fasterxml.jackson.core.JsonGenerator
+import com.fasterxml.jackson.core.Version
 import com.fasterxml.jackson.core.type.TypeReference
+import com.fasterxml.jackson.databind.JsonSerializer
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializerProvider
+import com.fasterxml.jackson.databind.module.SimpleModule
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.api.NewBingoGameResource
-import com.petscape.server.api.NewCustomBingoGameResource
+import com.petscape.server.api.*
 import com.petscape.server.auth.PetscapeAuthenticator
 import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
@@ -18,6 +22,7 @@ import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.bson.codecs.configuration.CodecRegistries
 import org.bson.codecs.pojo.PojoCodecProvider
+import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
@@ -36,6 +41,16 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
     private lateinit var logger: Logger
     private lateinit var database: MongoDatabase
+
+    private val objectIdSerializer = object : JsonSerializer<ObjectId>() {
+        override fun serialize(value: ObjectId, gen: JsonGenerator, serializers: SerializerProvider) {
+            gen.writeString(value.toString())
+        }
+
+        override fun handledType(): Class<ObjectId> {
+            return ObjectId::class.java
+        }
+    }
 
     override fun getName(): String {
         return "petscape-server"
@@ -65,6 +80,14 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(AuthDynamicFeature(auth))
         environment.jersey().register(NewBingoGameResource(database))
         environment.jersey().register(NewCustomBingoGameResource(database))
+        environment.jersey().register(AddBingoCardResource(database))
+        environment.jersey().register(CompleteSquareResource(database))
+        environment.jersey().register(UpdateNotesResource(database))
+
+        val serializersModule = SimpleModule("serializers", Version.unknownVersion())
+            .addSerializer(objectIdSerializer)
+
+        environment.objectMapper.registerModule(serializersModule)
 
 //        environment.healthChecks().register()
     }
