@@ -33,9 +33,9 @@ Create a new bingo game with custom defined squares. All players will play off o
 ```
 [
     {
-        "boss": `Boss Name`
-        "item": `Item Name`
-        "task": "String representing the task that needs to be completed"
+        "boss": "Boss Name - optional",
+        "item": "Item Name - optional",
+        "task": "Custom task description - optional"
     },
     ....    
 ]
