@@ -30,15 +30,16 @@ Create a new bingo game with custom defined squares. All players will play off o
 **json body**
 - JSON body with a list of 25 squares that can include bosses, items, or custom tasks  
 
-  
-    [
-        {
-            "boss": `Boss Name`
-            "item": `Item Name`
-            "task": "String representing the task that needs to be completed"
-        },
-        ....    
-    ]
+```
+[
+    {
+        "boss": `Boss Name`
+        "item": `Item Name`
+        "task": "String representing the task that needs to be completed"
+    },
+    ....    
+]
+```
     
 ## /bingo/add_card
 Add a card for a user to a bingo game. Card will either be the parent card for the game, or a randomly generated card, depending on the game type.
