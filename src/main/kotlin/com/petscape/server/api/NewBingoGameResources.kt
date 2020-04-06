@@ -51,7 +51,6 @@ class NewBingoGameResource(private val db: MongoDatabase) {
 @PermitAll
 class NewCustomBingoGameResource(private val db: MongoDatabase) {
 
-    // todo add free_space option
     @POST
     fun createBingoGame(
         @QueryParam("name") @NotEmpty name: String,
