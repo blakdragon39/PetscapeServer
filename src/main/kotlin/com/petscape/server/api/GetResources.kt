@@ -6,6 +6,7 @@ import com.petscape.server.models.BingoCard
 import com.petscape.server.models.BingoGame
 import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById
+import java.io.ByteArrayInputStream
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull
@@ -24,6 +25,24 @@ class GetCardResource(private val db: MongoDatabase) {
         val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
         val game = games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
         return game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
+    }
+}
+
+
+@Path("/bingo/get_card_image")
+@Produces("image/png")
+@PermitAll
+class GetCardImageResource(private val db: MongoDatabase) {
+
+    @GET
+    fun getImage(@QueryParam("game_id") @NotNull gameId: ObjectId,
+                 @QueryParam("username") @NotEmpty username: String): Response {
+        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
+        val game = games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
+        val card = game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
+        val imageData = ByteArray()
+
+        return Response.ok(ByteArrayInputStream(imageData)).build()
     }
 }
 

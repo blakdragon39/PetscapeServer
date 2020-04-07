@@ -85,6 +85,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(UpdateNotesResource(database))
         environment.jersey().register(GetWinnersResource(database))
         environment.jersey().register(GetCardResource(database))
+        environment.jersey().register(GetCardImageResource(database))
 
         val serializersModule = SimpleModule("serializers", Version.unknownVersion())
             .addSerializer(objectIdSerializer)
@@ -92,6 +93,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.objectMapper.registerModule(serializersModule)
 
 //        environment.healthChecks().register()
+        // todo check that all items and bosses have corresponding images in resources
     }
 
     private fun seedDb() {
