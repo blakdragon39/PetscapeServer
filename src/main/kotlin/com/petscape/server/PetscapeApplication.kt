@@ -83,7 +83,8 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(AddBingoCardResource(database))
         environment.jersey().register(CompleteSquareResource(database))
         environment.jersey().register(UpdateNotesResource(database))
-        environment.jersey().register(WinnersResource(database))
+        environment.jersey().register(GetWinnersResource(database))
+        environment.jersey().register(GetCardResource(database))
 
         val serializersModule = SimpleModule("serializers", Version.unknownVersion())
             .addSerializer(objectIdSerializer)
