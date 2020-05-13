@@ -82,11 +82,16 @@ class GetCardImageResource(private val db: MongoDatabase) {
     private fun generateSquareImage(square: BingoSquare): BufferedImage {
         val image = BufferedImage(squareSize, squareSize, BufferedImage.TYPE_INT_ARGB)
         image.createGraphics().apply {
+            if (square.completed) {
+                paint = Color(181, 58, 58)
+                fillRect(0, 0, squareSize, squareSize)
+            }
+
             color = Color.BLACK
             drawRect(0, 0, squareSize - 1, squareSize - 1)
         }
 
-        //todo boss, boss + item, item, task, free space
+        //todo boss + item, task, free space
         if (square.boss != null) {
             val bossImage = ImageIO.read(FileUtils.loadBoss(square.boss!!))
             drawScaledImage(bossImage, image)
