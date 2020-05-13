@@ -44,7 +44,6 @@ object FileUtils {
         }
     }
 
-
     private fun goUp(file: File): File {
         if (file.isDirectory && file.listFiles().any { it.name == "src" }) {
             return file

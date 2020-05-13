@@ -4,12 +4,13 @@ import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
 import com.petscape.server.models.BingoCard
 import com.petscape.server.models.BingoGame
+import com.petscape.server.models.BingoSquare
 import com.petscape.server.utils.FileUtils
 import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById
+import java.awt.Color
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
-import java.io.File
 import javax.annotation.security.PermitAll
 import javax.imageio.ImageIO
 import javax.validation.constraints.NotEmpty
@@ -63,12 +64,8 @@ class GetCardImageResource(private val db: MongoDatabase) {
         var y = 0
 
         card.squares?.forEach { square ->
-            //todo boss, boss + item, item, task
-            //todo !! ???
-            if (square.boss != null) {
-                val squareImage = ImageIO.read(FileUtils.loadBoss(square.boss!!))
-                image.graphics.drawImage(squareImage, x, y, squareSize, squareSize, null)
-            }
+            val squareImage = generateSquareImage(square)
+            image.graphics.drawImage(squareImage, x, y, squareSize, squareSize, null)
 
             x += squareSize
             if (x >= imageSize) {
@@ -80,6 +77,34 @@ class GetCardImageResource(private val db: MongoDatabase) {
         val baos = ByteArrayOutputStream()
         ImageIO.write(image, "png", baos)
         return baos.toByteArray()
+    }
+
+    private fun generateSquareImage(square: BingoSquare): BufferedImage {
+        val image = BufferedImage(squareSize, squareSize, BufferedImage.TYPE_INT_ARGB)
+        image.createGraphics().apply {
+            color = Color.BLACK
+            drawRect(0, 0, squareSize - 1, squareSize - 1)
+        }
+
+        //todo boss, boss + item, item, task, free space
+        if (square.boss != null) {
+            val bossImageSize = squareSize - 4
+            val bossImage = ImageIO.read(FileUtils.loadBoss(square.boss!!))
+
+            if (bossImage.height < bossImage.width) {
+                val scale = bossImage.height.toFloat() / bossImage.width.toFloat()
+                val scaledHeight = (bossImageSize * scale).toInt()
+                val offset = (squareSize - scaledHeight) / 2
+                image.graphics.drawImage(bossImage, 2, offset, bossImageSize, scaledHeight, null)
+            } else {
+                val scale = bossImage.width.toFloat() / bossImage.height.toFloat()
+                val scaledWidth = (bossImageSize * scale).toInt()
+                val offset = (squareSize - scaledWidth) / 2
+                image.graphics.drawImage(bossImage, offset, 2, scaledWidth, bossImageSize, null)
+            }
+        }
+
+        return image
     }
 }
 
