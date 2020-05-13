@@ -12,8 +12,16 @@ const val s = "/"
 
 object FileUtils {
 
+    fun loadBoss(boss: Boss): InputStream {
+        return load("bosses$s${boss.file}")
+    }
+
     fun loadBoss(boss: LiteBoss): InputStream {
-        return load("bosses${s}${boss.file}")
+        return load("bosses$s${boss.file}")
+    }
+
+    fun loadDrop(drop: Drop): InputStream {
+        return load("items$s${drop.file}")
     }
 
     fun load(name: String): InputStream {

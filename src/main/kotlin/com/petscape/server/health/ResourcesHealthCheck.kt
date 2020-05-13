@@ -5,6 +5,7 @@ import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BOSSES
 import com.petscape.server.models.Boss
 import com.petscape.server.utils.FileUtils
+import java.io.FileNotFoundException
 
 class ResourcesHealthCheck(private val db: MongoDatabase) : HealthCheck() {
 
@@ -12,12 +13,18 @@ class ResourcesHealthCheck(private val db: MongoDatabase) : HealthCheck() {
         val bosses = db.getCollection(COLLECTION_BOSSES, Boss::class.java)
 
         for (boss in bosses.find()) {
-            val bossFile = FileUtils.findBoss(boss)
-            bossFile ?: return Result.unhealthy("File for boss ${boss.name} not found")
+            try {
+                FileUtils.loadBoss(boss)
+            } catch (e: FileNotFoundException) {
+                return Result.unhealthy("File not found for ${boss.name}")
+            }
 
             for (drop in boss.drops) {
-                val dropFile = FileUtils.findDrop(drop)
-                dropFile ?: return Result.unhealthy("File for drop ${drop.item} not found")
+                try {
+                    FileUtils.loadDrop(drop)
+                } catch (e: FileNotFoundException) {
+                    return Result.unhealthy("File not found for ${drop.item}")
+                }
             }
         }
 

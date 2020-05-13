@@ -88,23 +88,29 @@ class GetCardImageResource(private val db: MongoDatabase) {
 
         //todo boss, boss + item, item, task, free space
         if (square.boss != null) {
-            val bossImageSize = squareSize - 4
             val bossImage = ImageIO.read(FileUtils.loadBoss(square.boss!!))
-
-            if (bossImage.height < bossImage.width) {
-                val scale = bossImage.height.toFloat() / bossImage.width.toFloat()
-                val scaledHeight = (bossImageSize * scale).toInt()
-                val offset = (squareSize - scaledHeight) / 2
-                image.graphics.drawImage(bossImage, 2, offset, bossImageSize, scaledHeight, null)
-            } else {
-                val scale = bossImage.width.toFloat() / bossImage.height.toFloat()
-                val scaledWidth = (bossImageSize * scale).toInt()
-                val offset = (squareSize - scaledWidth) / 2
-                image.graphics.drawImage(bossImage, offset, 2, scaledWidth, bossImageSize, null)
-            }
+            drawScaledImage(bossImage, image)
+        } else if (square.item != null) {
+            val itemImage = ImageIO.read(FileUtils.loadDrop(square.item!!))
+            drawScaledImage(itemImage, image)
         }
 
         return image
+    }
+
+    private fun drawScaledImage(srcImage: BufferedImage, destImage: BufferedImage) {
+        val smallerSquareSize = squareSize - 4
+        if (srcImage.height < srcImage.width) {
+            val scale = srcImage.height.toFloat() / srcImage.width.toFloat()
+            val scaledHeight = (smallerSquareSize * scale).toInt()
+            val offset = (squareSize - scaledHeight) / 2
+            destImage.graphics.drawImage(srcImage, 2, offset, smallerSquareSize, scaledHeight, null)
+        } else {
+            val scale = srcImage.width.toFloat() / srcImage.height.toFloat()
+            val scaledWidth = (smallerSquareSize * scale).toInt()
+            val offset = (squareSize - scaledWidth) / 2
+            destImage.graphics.drawImage(srcImage, offset, 2, scaledWidth, smallerSquareSize, null)
+        }
     }
 }
 
