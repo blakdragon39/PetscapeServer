@@ -234,7 +234,7 @@
   },
   {
     "name": "Corporeal Beast",
-    "file": "corporeal_beast.webp",
+    "file": "corporeal_beast.png",
     "wilderness": false,
     "slayer_level": 0,
     "drops": [
@@ -250,7 +250,7 @@
       },
       {
         "item": "Elysian Sigil",
-        "file": "elysian_sigil.webp",
+        "file": "elysian_sigil.png",
         "drop_rate": 4095
       },
       {
@@ -265,12 +265,12 @@
       },
       {
         "item": "Spectral Sigil",
-        "file": "spectral_sigil.webp",
+        "file": "spectral_sigil.png",
         "drop_rate": 1365
       },
       {
         "item": "Spirit Shield",
-        "file": "spirit_shield.webp",
+        "file": "spirit_shield.png",
         "drop_rate": 64
       }
     ]
@@ -516,7 +516,7 @@
       },
       {
         "item": "Prince Black Dragon",
-        "file": "prince_black_dragon.webp",
+        "file": "prince_black_dragon.png",
         "drop_rate": 3000
       },
       {
@@ -587,7 +587,7 @@
       },
       {
         "item": "Kree'Arra Jr.",
-        "file": "kree_arra_jr.webp",
+        "file": "kree_arra_jr.png",
         "drop_rate": 5000
       },
       {
@@ -648,7 +648,7 @@
       },
       {
         "item": "Sarachnis Cudgel",
-        "file": "sarachnis_cudgel.webp",
+        "file": "sarachnis_cudgel.png",
         "drop_rate": 0
       },
       {
