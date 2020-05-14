@@ -9,8 +9,10 @@ import com.petscape.server.utils.FileUtils
 import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById
 import java.awt.Color
+import java.awt.FontMetrics
 import java.awt.image.BufferedImage
 import java.io.ByteArrayOutputStream
+import java.util.*
 import javax.annotation.security.PermitAll
 import javax.imageio.ImageIO
 import javax.validation.constraints.NotEmpty
@@ -18,6 +20,7 @@ import javax.validation.constraints.NotNull
 import javax.ws.rs.*
 import javax.ws.rs.core.MediaType
 import javax.ws.rs.core.Response
+
 
 @Path("/bingo/get_card")
 @Produces(MediaType.APPLICATION_JSON)
@@ -41,6 +44,7 @@ class GetCardImageResource(private val db: MongoDatabase) {
 
     private val imageSize = 600
     private val squareSize = imageSize / 5
+    private val subSquareSize = squareSize / 3
 
     @GET
     fun getImage(@QueryParam("game_id") @NotNull gameId: ObjectId,
@@ -80,6 +84,7 @@ class GetCardImageResource(private val db: MongoDatabase) {
     }
 
     private fun generateSquareImage(square: BingoSquare): BufferedImage {
+        //todo draw extra 1 pixel border around the image
         val image = BufferedImage(squareSize, squareSize, BufferedImage.TYPE_INT_ARGB)
         image.createGraphics().apply {
             if (square.completed) {
@@ -91,30 +96,109 @@ class GetCardImageResource(private val db: MongoDatabase) {
             drawRect(0, 0, squareSize - 1, squareSize - 1)
         }
 
-        //todo boss + item, task, free space
         if (square.boss != null) {
             val bossImage = ImageIO.read(FileUtils.loadBoss(square.boss!!))
-            drawScaledImage(bossImage, image)
+            drawMainImage(bossImage, image)
+            if (square.item != null) {
+                val itemImage = ImageIO.read(FileUtils.loadDrop(square.item!!))
+                drawSubImage(itemImage, image)
+            }
         } else if (square.item != null) {
             val itemImage = ImageIO.read(FileUtils.loadDrop(square.item!!))
-            drawScaledImage(itemImage, image)
+            drawMainImage(itemImage, image)
+        } else if (square.task != null) {
+            drawWrappedString(image, square.task!!, if (square.completed) Color.WHITE else Color.BLACK)
+        } else {
+            drawCenteredString(image, "Free Space", Color.WHITE)
         }
 
         return image
     }
 
-    private fun drawScaledImage(srcImage: BufferedImage, destImage: BufferedImage) {
-        val smallerSquareSize = squareSize - 4
+    private fun drawMainImage(srcImage: BufferedImage, destImage: BufferedImage) {
+        val scale = getScale(srcImage)
+        val paddedSquareSize = squareSize - 4
+
         if (srcImage.height < srcImage.width) {
-            val scale = srcImage.height.toFloat() / srcImage.width.toFloat()
-            val scaledHeight = (smallerSquareSize * scale).toInt()
+            val scaledHeight = (paddedSquareSize * scale).toInt()
             val offset = (squareSize - scaledHeight) / 2
-            destImage.graphics.drawImage(srcImage, 2, offset, smallerSquareSize, scaledHeight, null)
+            destImage.graphics.drawImage(srcImage, 2, offset, paddedSquareSize, scaledHeight, null)
         } else {
-            val scale = srcImage.width.toFloat() / srcImage.height.toFloat()
-            val scaledWidth = (smallerSquareSize * scale).toInt()
+            val scaledWidth = (paddedSquareSize * scale).toInt()
             val offset = (squareSize - scaledWidth) / 2
-            destImage.graphics.drawImage(srcImage, offset, 2, scaledWidth, smallerSquareSize, null)
+            destImage.graphics.drawImage(srcImage, offset, 2, scaledWidth, paddedSquareSize, null)
+        }
+    }
+
+    private fun drawSubImage(srcImage: BufferedImage, destImage: BufferedImage) {
+        val scale = getScale(srcImage)
+        if (srcImage.height < srcImage.width) {
+            val scaledHeight = (subSquareSize * scale).toInt()
+            val x = destImage.width - subSquareSize - 4
+            val y = destImage.height - scaledHeight - 4
+            destImage.graphics.drawImage(srcImage, x, y, subSquareSize, scaledHeight , null)
+        } else {
+            val scaledWidth = (subSquareSize * scale).toInt()
+            val x = destImage.width - scaledWidth - 4
+            val y = destImage.height - subSquareSize - 4
+            destImage.graphics.drawImage(srcImage, x, y, scaledWidth, subSquareSize , null)
+        }
+    }
+
+    private fun drawWrappedString(image: BufferedImage, text: String, textColor: Color) {
+        val graphics = image.createGraphics()
+        graphics.paint = textColor
+
+        var y = graphics.fontMetrics.height
+        val textLines = wrap(text, graphics.fontMetrics)
+        textLines.forEach { line ->
+            graphics.drawString(line, 4, y)
+            y += graphics.fontMetrics.height
+        }
+    }
+
+    private fun drawCenteredString(image: BufferedImage, text: String, textColor: Color) {
+        image.createGraphics().apply {
+            val x = (squareSize - fontMetrics.stringWidth(text)) / 2
+            val y = (squareSize - fontMetrics.height) / 2 + fontMetrics.ascent
+            paint = textColor
+            drawString(text, x, y)
+        }
+    }
+
+    private fun wrap(txt: String, fm: FontMetrics, maxWidth: Int = squareSize - 4): List<String> {
+        val st = StringTokenizer(txt)
+        val list: MutableList<String> = mutableListOf()
+
+        var line = ""
+        var lineBeforeAppend = ""
+
+        while (st.hasMoreTokens()) {
+            val seg = st.nextToken()
+            lineBeforeAppend = line
+            line += "$seg "
+
+            val width = fm.stringWidth(line)
+            line = if (width < maxWidth) {
+                continue
+            } else { //new Line.
+                list.add(lineBeforeAppend)
+                "$seg "
+            }
+        }
+
+        //the remaining part.
+        if (line.isNotEmpty()) {
+            list.add(line)
+        }
+
+        return list
+    }
+
+    private fun getScale(image: BufferedImage): Float {
+        return when {
+            image.height < image.width -> image.height.toFloat() / image.width.toFloat()
+            else -> image.width.toFloat() / image.height.toFloat()
         }
     }
 }
