@@ -65,3 +65,15 @@ Update notes on a card.
 **game_id** (`mongo ObjectId`)  
 **card_id** (`mongo ObjectId`)  
 **notes** (String)
+
+## /bingo/winners
+Get the winning cards from a game of bingo (one or more lines finished)
+
+#### Parameters
+**game_id** (`mongo ObjectId`)  
+
+## /bingo/get_card_image
+
+#### Parameters
+**game_id** (`mongo ObjectId`)  
+**username** (String)
