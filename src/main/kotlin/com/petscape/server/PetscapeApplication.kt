@@ -17,6 +17,7 @@ import com.petscape.server.auth.User
 import com.petscape.server.health.HealthCheckResource
 import com.petscape.server.health.ResourcesHealthCheck
 import com.petscape.server.models.Boss
+import com.petscape.server.utils.FileUtils
 import io.dropwizard.Application
 import io.dropwizard.auth.AuthDynamicFeature
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter
@@ -100,7 +101,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
     private fun seedDb() {
         val bossCollection = database.getCollection(COLLECTION_BOSSES, Boss::class.java)
-        val file = File(javaClass.classLoader.getResource("initial_data.json")?.file ?: "")
+        val file = FileUtils.load("initial_data.json")
         val bosses = ObjectMapper().readValue(file, object : TypeReference<List<Boss>>() {})
 
         bossCollection.drop()

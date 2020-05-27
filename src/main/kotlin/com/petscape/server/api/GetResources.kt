@@ -171,7 +171,7 @@ class GetCardImageResource(private val db: MongoDatabase) {
         val list: MutableList<String> = mutableListOf()
 
         var line = ""
-        var lineBeforeAppend = ""
+        var lineBeforeAppend: String
 
         while (st.hasMoreTokens()) {
             val seg = st.nextToken()
