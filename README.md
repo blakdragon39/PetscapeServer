@@ -1,7 +1,7 @@
 # Endpoints
 **Bold** parameters are required
 
-## /bingo/all GET
+## GET /bingo/all
 List all existing bingo games
 
 #### Returns
@@ -16,7 +16,7 @@ List all existing bingo games
 ```
 
 
-## /bingo/new_game POST
+## POST /bingo/new_game
 Create a new bingo game that randomly generates cards.
 
 #### Parameters
@@ -38,7 +38,7 @@ Create a new bingo game that randomly generates cards.
 - `Bingo Game` object
 
 
-## /bingo/new_custom_game POST
+## POST /bingo/new_custom_game
 Create a new bingo game with custom defined squares. All players will play off of the same matching card.
 
 #### Parameters
@@ -63,7 +63,7 @@ Create a new bingo game with custom defined squares. All players will play off o
 - `Bingo Game` object
 
     
-## /bingo/add_card POST
+## POST /bingo/add_card
 Add a card for a user to a bingo game. Card will either be the parent card for the game, or a randomly generated card, depending on the game type.
 
 #### Parameters
@@ -76,7 +76,7 @@ Add a card for a user to a bingo game. Card will either be the parent card for t
 - `Bingo Card` object
 
 
-## /bingo/complete_square POST
+## POST /bingo/complete_square
 Marks a square as complete on a game card.
 
 #### Parameters
@@ -88,7 +88,7 @@ Marks a square as complete on a game card.
 - `Bingo Card` object
 
 
-## /bingo/update_notes POST
+## POST /bingo/update_notes
 Update notes on a card.
 
 #### Parameters
@@ -115,7 +115,7 @@ Get the winning cards from a game of bingo (one or more lines finished)
 ```
 
 
-## /bingo/get_card
+## GET /bingo/get_card
 
 #### Parameters
 **game_id** (`mongo ObjectId`)
@@ -125,7 +125,7 @@ Get the winning cards from a game of bingo (one or more lines finished)
 - `Bingo Card` object
 
 
-## /bingo/get_card_image
+## GET /bingo/get_card_image
 
 #### Parameters
 **game_id** (`mongo ObjectId`)  
