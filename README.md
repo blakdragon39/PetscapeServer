@@ -100,7 +100,7 @@ Update notes on a card.
 - `Bingo Card` object
 
 
-## /bingo/winners
+## GET /bingo/winners
 Get the winning cards from a game of bingo (one or more lines finished)
 
 #### Parameters
