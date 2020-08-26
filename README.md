@@ -1,7 +1,22 @@
 # Endpoints
 **Bold** parameters are required
 
-## /bingo/new_game
+## /bingo/all GET
+List all existing bingo games
+
+#### Returns
+```
+[
+    {
+        "id": mongo ObjectId,
+        "name": String
+    },
+    ...
+]
+```
+
+
+## /bingo/new_game POST
 Create a new bingo game that randomly generates cards.
 
 #### Parameters
@@ -19,8 +34,11 @@ Create a new bingo game that randomly generates cards.
 **cards_match** (Boolean)
 - `true` if all players should play on a matching card. `false` if each player should get their own randomly generated card. 
 
+#### Returns
+- `Bingo Game` object
 
-## /bingo/new_custom_game
+
+## /bingo/new_custom_game POST
 Create a new bingo game with custom defined squares. All players will play off of the same matching card.
 
 #### Parameters
@@ -40,8 +58,12 @@ Create a new bingo game with custom defined squares. All players will play off o
     ....    
 ]
 ```
+
+#### Returns
+- `Bingo Game` object
+
     
-## /bingo/add_card
+## /bingo/add_card POST
 Add a card for a user to a bingo game. Card will either be the parent card for the game, or a randomly generated card, depending on the game type.
 
 #### Parameters
@@ -50,7 +72,11 @@ Add a card for a user to a bingo game. Card will either be the parent card for t
 **username** (String)
 - Name of the user to add a card for. Each user can only have one card per game.
 
-## /bingo/complete_square
+#### Returns
+- `Bingo Card` object
+
+
+## /bingo/complete_square POST
 Marks a square as complete on a game card.
 
 #### Parameters
@@ -58,7 +84,11 @@ Marks a square as complete on a game card.
 **card_id** (`mongo ObjectId`)  
 **square_id** (`mongo ObjectId`)
 
-## /bingo/update_notes
+#### Returns
+- `Bingo Card` object
+
+
+## /bingo/update_notes POST
 Update notes on a card.
 
 #### Parameters
@@ -66,14 +96,104 @@ Update notes on a card.
 **card_id** (`mongo ObjectId`)  
 **notes** (String)
 
+#### Returns
+- `Bingo Card` object
+
+
 ## /bingo/winners
 Get the winning cards from a game of bingo (one or more lines finished)
 
 #### Parameters
-**game_id** (`mongo ObjectId`)  
+**game_id** (`mongo ObjectId`)
+
+#### Returns
+```
+[
+    {Bingo Card},
+    ...
+]
+```
+
+
+## /bingo/get_card
+
+#### Parameters
+**game_id** (`mongo ObjectId`)
+**username** (String)
+
+#### Returns
+- `Bingo Card` object
+
 
 ## /bingo/get_card_image
 
 #### Parameters
 **game_id** (`mongo ObjectId`)  
 **username** (String)
+
+#### Returns
+- `image/png`
+
+
+# Models
+
+## Bingo Game
+```
+{
+    "id": mongo ObjectId,
+    "name": String,
+    "type": { BOSSES, ITEMS, COMBINED, OTHER },
+    "freeSpace": Boolean,
+    "parentCard": [
+        Bingo Square,
+        ...
+    ],
+    "cards": [
+        Bingo Card,
+        ...
+    ]
+}
+```
+
+## Bingo Card
+```
+{
+    "id": mongo ObjectId,
+    "username": String,
+    "notes": String,
+    "squares": [
+        Bingo Square,
+        ...
+    ]
+}
+```
+
+## Bingo Square
+```
+{
+    "id": mongo ObjectId,
+    "completed": Boolean,
+    "task": String,
+    "boss": Boss,
+    "item": Drop
+}
+```
+
+## Boss
+```
+{
+    "name": String,
+    "file": String,
+    "wilderness": Boolean,
+    "slayer_level": Int
+}
+```
+
+## Drop
+```
+{
+    "item": String,
+    "file": String,
+    "drop_rate": String
+}
+```
