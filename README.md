@@ -118,7 +118,7 @@ Get the winning cards from a game of bingo (one or more lines finished)
 ## GET /bingo/get_card
 
 #### Parameters
-**game_id** (`mongo ObjectId`)
+**game_id** (`mongo ObjectId`)  
 **username** (String)
 
 #### Returns
@@ -140,16 +140,16 @@ Get the winning cards from a game of bingo (one or more lines finished)
 ## Bingo Game
 ```
 {
-    "id": mongo ObjectId,
+    "id": {mongo ObjectId},
     "name": String,
     "type": { BOSSES, ITEMS, COMBINED, OTHER },
     "freeSpace": Boolean,
     "parentCard": [
-        Bingo Square,
+        {Bingo Square},
         ...
     ],
     "cards": [
-        Bingo Card,
+        {Bingo Card},
         ...
     ]
 }
@@ -158,11 +158,11 @@ Get the winning cards from a game of bingo (one or more lines finished)
 ## Bingo Card
 ```
 {
-    "id": mongo ObjectId,
+    "id": {mongo ObjectId},
     "username": String,
     "notes": String,
     "squares": [
-        Bingo Square,
+        {Bingo Square},
         ...
     ]
 }
@@ -171,7 +171,7 @@ Get the winning cards from a game of bingo (one or more lines finished)
 ## Bingo Square
 ```
 {
-    "id": mongo ObjectId,
+    "id": {mongo ObjectId},
     "completed": Boolean,
     "task": String,
     "boss": Boss,

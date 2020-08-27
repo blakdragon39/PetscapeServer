@@ -1,12 +1,27 @@
 package com.petscape.server.utils
 
 import com.mongodb.client.MongoDatabase
+import com.petscape.server.COLLECTION_BINGO_GAMES
 import com.petscape.server.COLLECTION_BOSSES
 import com.petscape.server.models.*
+import org.bson.types.ObjectId
+import org.litote.kmongo.findOneById
+import javax.ws.rs.WebApplicationException
+import javax.ws.rs.core.Response
 import kotlin.random.Random
 
 const val BINGO_NUM_SQUARES = 25
 private const val FREE_SQUARE = 12
+
+fun getGame(db: MongoDatabase, gameId: ObjectId): BingoGame {
+    val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
+    return games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
+}
+
+fun getCard(db: MongoDatabase, gameId: ObjectId, username: String): BingoCard {
+    val game = getGame(db, gameId)
+    return game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
+}
 
 fun generateSquares(db: MongoDatabase, type: BingoGameType, freeSpace: Boolean): List<BingoSquare> {
     val squares = mutableListOf<BingoSquare>()

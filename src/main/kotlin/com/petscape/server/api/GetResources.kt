@@ -1,13 +1,12 @@
 package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.COLLECTION_BINGO_GAMES
 import com.petscape.server.models.BingoCard
-import com.petscape.server.models.BingoGame
 import com.petscape.server.models.BingoSquare
 import com.petscape.server.utils.FileUtils
+import com.petscape.server.utils.getCard
+import com.petscape.server.utils.getGame
 import org.bson.types.ObjectId
-import org.litote.kmongo.findOneById
 import java.awt.Color
 import java.awt.FontMetrics
 import java.awt.image.BufferedImage
@@ -30,9 +29,7 @@ class GetCardResource(private val db: MongoDatabase) {
     @GET
     fun getCard(@QueryParam("game_id") @NotNull gameId: ObjectId,
                 @QueryParam("username") @NotEmpty username: String): BingoCard {
-        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
-        val game = games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
-        return game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
+        return getCard(gameId, username)
     }
 }
 
@@ -42,16 +39,14 @@ class GetCardResource(private val db: MongoDatabase) {
 @PermitAll
 class GetCardImageResource(private val db: MongoDatabase) {
 
-    private val imageSize = 600
-    private val squareSize = imageSize / 5
+    private val imageSize = 602
+    private val squareSize = (imageSize - 2) / 5 //2x one pixel border
     private val subSquareSize = squareSize / 3
 
     @GET
     fun getImage(@QueryParam("game_id") @NotNull gameId: ObjectId,
                  @QueryParam("username") @NotEmpty username: String): Response {
-        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
-        val game = games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
-        val card = game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
+        val card = getCard(db, gameId, username)
         val imageData = generateImage(card)
 
         return Response.status(200)
@@ -64,16 +59,26 @@ class GetCardImageResource(private val db: MongoDatabase) {
 
     private fun generateImage(card: BingoCard): ByteArray {
         val image = BufferedImage(imageSize, imageSize, BufferedImage.TYPE_INT_ARGB)
-        var x = 0
-        var y = 0
+        var x = 1
+        var y = 1
+
+        //draw border and white background
+        image.createGraphics().apply {
+            paint = Color(255, 255, 255)
+            fillRect(0, 0, imageSize, imageSize)
+
+            color = Color.BLACK
+            drawRect(0, 0, imageSize - 1, imageSize - 1)
+        }
 
         card.squares?.forEach { square ->
+            println("$x $y ${x + squareSize} ${y + squareSize}")
             val squareImage = generateSquareImage(square)
             image.graphics.drawImage(squareImage, x, y, squareSize, squareSize, null)
 
             x += squareSize
-            if (x >= imageSize) {
-                x = 0
+            if (x >= (imageSize - 2)) {
+                x = 1
                 y += squareSize
             }
         }
@@ -84,7 +89,6 @@ class GetCardImageResource(private val db: MongoDatabase) {
     }
 
     private fun generateSquareImage(square: BingoSquare): BufferedImage {
-        //todo draw extra 1 pixel border around the image
         val image = BufferedImage(squareSize, squareSize, BufferedImage.TYPE_INT_ARGB)
         image.createGraphics().apply {
             if (square.completed) {
@@ -210,8 +214,7 @@ class GetWinnersResource(private val db: MongoDatabase) {
 
     @GET
     fun getWinners(@QueryParam("game_id") @NotNull gameId: ObjectId): List<BingoCard> {
-        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
-        val game = games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
+        val game = getGame(db, gameId)
         return game.winners()
     }
 }
