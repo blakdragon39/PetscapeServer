@@ -29,7 +29,7 @@ class GetCardResource(private val db: MongoDatabase) {
     @GET
     fun getCard(@QueryParam("game_id") @NotNull gameId: ObjectId,
                 @QueryParam("username") @NotEmpty username: String): BingoCard {
-        return getCard(gameId, username)
+        return getCard(db, gameId, username)
     }
 }
 
