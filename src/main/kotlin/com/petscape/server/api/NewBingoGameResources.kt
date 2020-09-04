@@ -2,13 +2,9 @@ package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
-import com.petscape.server.models.BingoGame
-import com.petscape.server.models.BingoGameType
-import com.petscape.server.models.BingoSquare
-import com.petscape.server.models.CustomSquare
+import com.petscape.server.models.*
 import com.petscape.server.utils.BINGO_NUM_SQUARES
 import com.petscape.server.utils.generateSquares
-import com.petscape.server.utils.getBosses
 import com.petscape.server.utils.getItems
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotEmpty
@@ -38,7 +34,7 @@ class NewBingoGameResource(private val db: MongoDatabase) {
         game.freeSpace = freeSpace.toBoolean()
 
         if (cardsMatch.toBoolean()) {
-            game.parentCard = generateSquares(db, game.type, freeSpace.toBoolean())
+            game.parentCard = generateSquares(game.type, freeSpace.toBoolean())
         }
 
         db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java).insertOne(game)
@@ -65,12 +61,12 @@ class NewCustomBingoGameResource(private val db: MongoDatabase) {
             throw WebApplicationException("Must provide 25 squares", Response.Status.BAD_REQUEST)
         }
 
-        val bosses = getBosses(db)
+        val bosses = Boss.values().toList()
         val items = getItems(bosses)
 
         game.parentCard = squares.map { customSquare ->
             val square = BingoSquare()
-            square.boss = bosses.find { it.name == customSquare.boss }?.toLiteBoss()
+            square.boss = bosses.find { it.name == customSquare.boss }
             square.item = items.find { it.item == customSquare.item }
             square.task = customSquare.task
 

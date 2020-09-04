@@ -53,7 +53,7 @@ class BingoSquare {
     }
 
     @BsonId var id = ObjectId()
-    var boss: LiteBoss? = null
+    var boss: Boss? = null
     var item: Drop? = null
     var task: String? = null
     var completed = false

@@ -40,7 +40,7 @@ class AddBingoCardResource(private val db: MongoDatabase) {
         if (game.parentCard != null) {
             card.squares = game.parentCard
         } else {
-            card.squares = generateSquares(db, game.type, game.freeSpace)
+            card.squares = generateSquares(game.type, game.freeSpace)
         }
 
         game.cards.add(card)

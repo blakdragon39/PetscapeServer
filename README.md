@@ -182,10 +182,8 @@ Get the winning cards from a game of bingo (one or more lines finished)
 ## Boss
 ```
 {
-    "name": String,
-    "file": String,
-    "wilderness": Boolean,
-    "slayer_level": Int
+    "displayName": String,
+    "file": String
 }
 ```
 
@@ -193,7 +191,6 @@ Get the winning cards from a game of bingo (one or more lines finished)
 ```
 {
     "item": String,
-    "file": String,
-    "drop_rate": String
+    "file": String
 }
 ```

@@ -2,7 +2,6 @@ package com.petscape.server.utils
 
 import com.petscape.server.models.Boss
 import com.petscape.server.models.Drop
-import com.petscape.server.models.LiteBoss
 import java.io.File
 import java.io.InputStream
 import java.nio.file.Paths
@@ -13,10 +12,6 @@ const val s = "/"
 object FileUtils {
 
     fun loadBoss(boss: Boss): InputStream {
-        return load("bosses$s${boss.file}")
-    }
-
-    fun loadBoss(boss: LiteBoss): InputStream {
         return load("bosses$s${boss.file}")
     }
 

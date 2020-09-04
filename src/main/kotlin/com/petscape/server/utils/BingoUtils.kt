@@ -2,7 +2,6 @@ package com.petscape.server.utils
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
-import com.petscape.server.COLLECTION_BOSSES
 import com.petscape.server.models.*
 import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById
@@ -23,9 +22,9 @@ fun getCard(db: MongoDatabase, gameId: ObjectId, username: String): BingoCard {
     return game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
 }
 
-fun generateSquares(db: MongoDatabase, type: BingoGameType, freeSpace: Boolean): List<BingoSquare> {
+fun generateSquares(type: BingoGameType, freeSpace: Boolean): List<BingoSquare> {
     val squares = mutableListOf<BingoSquare>()
-    val choices = getSquareChoices(db, type).toMutableList()
+    val choices = getSquareChoices(type).toMutableList()
 
     for (i in 0 until BINGO_NUM_SQUARES) {
         val square = if (freeSpace && i == FREE_SQUARE) {
@@ -36,11 +35,11 @@ fun generateSquares(db: MongoDatabase, type: BingoGameType, freeSpace: Boolean):
             val square = BingoSquare()
 
             when (type) {
-                BingoGameType.BOSSES -> square.boss = choice as LiteBoss
+                BingoGameType.BOSSES -> square.boss = choice as Boss
                 BingoGameType.ITEMS -> square.item = choice as Drop
                 BingoGameType.COMBINED -> {
                     val pair = choice as Pair<*, *>
-                    square.boss = pair.first as LiteBoss
+                    square.boss = pair.first as Boss
                     square.item = pair.second as Drop
                 }
                 else -> Unit
@@ -55,16 +54,16 @@ fun generateSquares(db: MongoDatabase, type: BingoGameType, freeSpace: Boolean):
     return squares
 }
 
-private fun getSquareChoices(db: MongoDatabase, type: BingoGameType): List<Any> {
-    val bosses = getBosses(db)
+private fun getSquareChoices(type: BingoGameType): List<Any> {
+    val bosses = Boss.values().toList()
 
     return when (type) {
-        BingoGameType.BOSSES -> bosses.map { it.toLiteBoss() }
+        BingoGameType.BOSSES -> bosses
         BingoGameType.ITEMS -> getItems(bosses)
         BingoGameType.COMBINED -> {
             return bosses.flatMap { boss ->
                 boss.drops.map { drop ->
-                    Pair(boss.toLiteBoss(), drop)
+                    Pair(boss, drop)
                 }
             }
         }
@@ -72,11 +71,9 @@ private fun getSquareChoices(db: MongoDatabase, type: BingoGameType): List<Any> 
     }
 }
 
-fun getBosses(db: MongoDatabase): List<Boss> {
-    return db.getCollection(COLLECTION_BOSSES, Boss::class.java).find().toList()
-}
-
 fun getItems(bosses: List<Boss>): List<Drop> {
-    val items = bosses.flatMap { it.drops }
+    val items = bosses
+        .flatMap { it.drops }
+        .map { it.first }
     return items.distinctBy(Drop::item)
 }

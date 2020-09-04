@@ -2,9 +2,7 @@ package com.petscape.server
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.core.Version
-import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.JsonSerializer
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.SerializerProvider
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.mongodb.MongoClientSettings
@@ -16,8 +14,6 @@ import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
 import com.petscape.server.health.HealthCheckResource
 import com.petscape.server.health.ResourcesHealthCheck
-import com.petscape.server.models.Boss
-import com.petscape.server.utils.FileUtils
 import io.dropwizard.Application
 import io.dropwizard.auth.AuthDynamicFeature
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter
@@ -28,11 +24,9 @@ import org.bson.codecs.pojo.PojoCodecProvider
 import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import java.io.File
 
 
 const val DB_PETSCAPE = "petscape_db"
-const val COLLECTION_BOSSES = "bosses"
 const val COLLECTION_BINGO_GAMES = "bingo_games"
 
 @Throws(Exception::class)
@@ -69,8 +63,6 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
         val mongoClient = MongoClients.create()
         database = mongoClient.getDatabase(DB_PETSCAPE).withCodecRegistry(pojoCodecRegistry)
-
-        seedDb()
     }
 
     override fun run(configuration: PetscapeConfiguration, environment: Environment) {
@@ -80,7 +72,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
             .setRealm("Authentication")
             .buildAuthFilter()
 
-        environment.healthChecks().register("resources", ResourcesHealthCheck(database))
+        environment.healthChecks().register("resources", ResourcesHealthCheck())
 
         environment.jersey().register(AuthDynamicFeature(auth))
         environment.jersey().register(ListAllGamesResource(database))
@@ -98,14 +90,5 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
             .addSerializer(objectIdSerializer)
 
         environment.objectMapper.registerModule(serializersModule)
-    }
-
-    private fun seedDb() {
-        val bossCollection = database.getCollection(COLLECTION_BOSSES, Boss::class.java)
-        val file = FileUtils.load("initial_data.json")
-        val bosses = ObjectMapper().readValue(file, object : TypeReference<List<Boss>>() {})
-
-        bossCollection.drop()
-        bossCollection.insertMany(bosses)
     }
 }

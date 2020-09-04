@@ -1,29 +1,27 @@
 package com.petscape.server.health
 
 import com.codahale.metrics.health.HealthCheck
-import com.mongodb.client.MongoDatabase
-import com.petscape.server.COLLECTION_BOSSES
 import com.petscape.server.models.Boss
 import com.petscape.server.utils.FileUtils
 import java.io.FileNotFoundException
 
-class ResourcesHealthCheck(private val db: MongoDatabase) : HealthCheck() {
+class ResourcesHealthCheck : HealthCheck() {
 
     override fun check(): Result {
-        val bosses = db.getCollection(COLLECTION_BOSSES, Boss::class.java)
+        val bosses = Boss.values()
 
-        for (boss in bosses.find()) {
+        for (boss in bosses) {
             try {
                 FileUtils.loadBoss(boss)
             } catch (e: FileNotFoundException) {
                 return Result.unhealthy("File not found for ${boss.name}")
             }
 
-            for (drop in boss.drops) {
+            for (dropPair in boss.drops) {
                 try {
-                    FileUtils.loadDrop(drop)
+                    FileUtils.loadDrop(dropPair.first)
                 } catch (e: FileNotFoundException) {
-                    return Result.unhealthy("File not found for ${drop.item}")
+                    return Result.unhealthy("File not found for ${dropPair.first.item}")
                 }
             }
         }

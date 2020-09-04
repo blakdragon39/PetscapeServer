@@ -15,11 +15,11 @@ import javax.ws.rs.core.MediaType
 class ListAllGamesResource(private val db: MongoDatabase) {
 
     @GET
-    fun listAllGames(): List<BingoGameLite> {
+    fun listAllGames(): List<LiteBingoGame> {
         val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
         return games.find().toList()
-                .map { BingoGameLite(it.id.toString(), it.name ?: it.id.toString()) }
+                .map { LiteBingoGame(it.id.toString(), it.name ?: it.id.toString()) }
     }
 }
 
-class BingoGameLite(val id: String, val name: String)
+class LiteBingoGame(val id: String, val name: String)
