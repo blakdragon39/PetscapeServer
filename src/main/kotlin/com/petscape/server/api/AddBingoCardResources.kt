@@ -2,8 +2,7 @@ package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
-import com.petscape.server.models.BingoCard
-import com.petscape.server.models.BingoGame
+import com.petscape.server.models.*
 import com.petscape.server.utils.generateSquares
 import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById
@@ -24,8 +23,8 @@ class AddBingoCardResource(private val db: MongoDatabase) {
     fun addBingoCard(
         @QueryParam("id") @NotNull gameId: ObjectId,
         @QueryParam("username") @NotEmpty username: String
-    ) : BingoCard {
-        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
+    ) : BingoCardModel {
+        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
         val game = games.findOneById(gameId)
 
         if (game == null) {
@@ -34,7 +33,7 @@ class AddBingoCardResource(private val db: MongoDatabase) {
             throw WebApplicationException("Card already exists for that user in this game", Response.Status.FORBIDDEN)
         }
 
-        val card = BingoCard()
+        val card = BingoCardMongo()
         card.username = username
 
         if (game.parentCard != null) {
@@ -46,6 +45,6 @@ class AddBingoCardResource(private val db: MongoDatabase) {
         game.cards.add(card)
         games.replaceOneById(gameId, game)
 
-        return card
+        return card.toModel()
     }
 }

@@ -1,12 +1,16 @@
 package com.petscape.server.models
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.petscape.server.models.DropTag.*
+
+class DropModel(drop: Drop) {
+    val item = drop.item
+    val file = drop.file
+}
 
 enum class Drop(
     val item: String,
     val file: String,
-    @JsonIgnore val tags: List<DropTag> = emptyList()
+    val tags: List<DropTag> = emptyList()
 ) {
     abyssalBludgeon(
         "Abyssal Bludgeon",
@@ -139,6 +143,10 @@ enum class Drop(
         "Dragon Pickaxe",
         "dragon_pickaxe.png"
     ),
+    eldritchOrb(
+        "Eldritch Orb",
+        "eldritch_orb.png"
+    ),
     eliteClueScroll(
         "Clue Scroll (Elite)",
         "clue_scroll_elite.png",
@@ -169,6 +177,10 @@ enum class Drop(
         "Granite Ring",
         "granite_ring.png"
     ),
+    harmonisedOrb(
+        "Harmonised Orb",
+        "harmonised_orb.png"
+    ),
     hellpuppy(
         "Hellpuppy",
         "hellpuppy.png",
@@ -195,6 +207,22 @@ enum class Drop(
         "ikkle_hydra.png",
         listOf(PET)
     ),
+    inquisitorsGreatHelm(
+        "Inquisitor's Great Helm",
+        "inquisitors_great_helm.png"
+    ),
+    inquisitorsHauberk(
+        "Inquisitor's Hauberk",
+        "inquisitors_hauberk.png"
+    ),
+    inquisitorsPlateskirt(
+        "Inquisitor's Plateskirt",
+        "inquisitors_plateskirt.png"
+    ),
+    inquisitorsMace(
+        "Inquisitor's Mace",
+        "inquisitors_mace.png"
+    ),
     jarOfChemicals(
         "Jar of Chemicals",
         "jar_of_chemicals.png",
@@ -208,6 +236,11 @@ enum class Drop(
     jarOfDirt(
         "Jar of Dirt",
         "jar_of_dirt.png",
+        listOf(JAR)
+    ),
+    jarOfDreams(
+        "Jar of Dreams",
+        "jar_of_dreams.png",
         listOf(JAR)
     ),
     jarOfEyes(
@@ -269,6 +302,11 @@ enum class Drop(
         "kril_tsutsaroth_jr.png",
         listOf(PET)
     ),
+    littleNightmare(
+        "Little Nightmare",
+        "little_nightmare.png",
+        listOf(PET)
+    ),
     magicFang(
         "Magic Fang",
         "magic_fang.png"
@@ -280,6 +318,10 @@ enum class Drop(
     mudBattlestaff(
         "Mud Battlestaff",
         "mud_battlestaff.png"
+    ),
+    nightmareStaff(
+        "Nightmare Staff",
+        "nightmare_staff.png"
     ),
     noon(
         "Noon",
@@ -423,6 +465,10 @@ enum class Drop(
         "vetion_jr.png",
         listOf(PET)
     ),
+    volatileOrb(
+        "Volatile Orb",
+        "volatile_orb.png"
+    ),
     vorki(
         "Vorki",
         "vorki.png",
@@ -444,5 +490,7 @@ enum class Drop(
         "Zilyana Jr.",
         "zilyana_jr.png",
         listOf(PET)
-    )
+    );
+
+    fun toModel(): DropModel = DropModel(this)
 }

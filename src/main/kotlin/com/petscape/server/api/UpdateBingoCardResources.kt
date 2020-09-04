@@ -2,8 +2,8 @@ package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
-import com.petscape.server.models.BingoCard
-import com.petscape.server.models.BingoGame
+import com.petscape.server.models.BingoCardModel
+import com.petscape.server.models.BingoGameMongo
 import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById
 import org.litote.kmongo.replaceOneById
@@ -21,17 +21,16 @@ class CompleteSquareResource(private val db: MongoDatabase) {
     @POST
     fun updateBingoCard(@QueryParam("game_id") @NotNull gameId: ObjectId,
                         @QueryParam("card_id") @NotNull cardId: ObjectId,
-                        @QueryParam("square_id") @NotNull squareId: ObjectId): BingoCard {
+                        @QueryParam("square_id") @NotNull squareId: ObjectId): BingoCardModel {
 
-        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
+        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
         val game = games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
         val card = game.cards.find { it.id == cardId } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
         val square = card.squares?.find { it.id == squareId } ?: throw WebApplicationException("Square not found", Response.Status.NOT_FOUND)
         square.completed = true
 
         games.replaceOneById(gameId, game)
-        //todo update whether or not the card is a winner? May depend on game type
-        return card
+        return card.toModel()
     }
 }
 
@@ -43,14 +42,14 @@ class UpdateNotesResource(private val db: MongoDatabase) {
     @POST
     fun updateNotes(@QueryParam("game_id") @NotNull gameId: ObjectId,
                     @QueryParam("card_id") @NotNull cardId: ObjectId,
-                    @QueryParam("notes") notes: String): BingoCard {
+                    @QueryParam("notes") notes: String): BingoCardModel {
 
-        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
+        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
         val game = games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
         val card = game.cards.find { it.id == cardId } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
         card.notes = notes
 
         games.replaceOneById(gameId, game)
-        return card
+        return card.toModel()
     }
 }

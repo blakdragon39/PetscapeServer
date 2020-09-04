@@ -24,10 +24,10 @@ class NewBingoGameResource(private val db: MongoDatabase) {
         @QueryParam("type") @NotEmpty type: String,
         @QueryParam("free_space") @NotEmpty freeSpace: String,
         @QueryParam("cards_match") @NotEmpty cardsMatch: String
-    ): BingoGame {
+    ): BingoGameModel {
         validateType(type)
 
-        val game = BingoGame()
+        val game = BingoGameMongo()
         game.name = name
         game.cards = mutableListOf()
         game.type = BingoGameType.valueOf(type)
@@ -37,8 +37,8 @@ class NewBingoGameResource(private val db: MongoDatabase) {
             game.parentCard = generateSquares(game.type, freeSpace.toBoolean())
         }
 
-        db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java).insertOne(game)
-        return game
+        db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java).insertOne(game)
+        return game.toModel()
     }
 }
 
@@ -51,8 +51,8 @@ class NewCustomBingoGameResource(private val db: MongoDatabase) {
     fun createBingoGame(
         @QueryParam("name") @NotEmpty name: String,
         @NotNull squares: List<CustomSquare>
-    ): BingoGame {
-        val game = BingoGame()
+    ): BingoGameModel {
+        val game = BingoGameMongo()
         game.name = name
         game.cards = mutableListOf()
         game.type = BingoGameType.OTHER
@@ -65,7 +65,7 @@ class NewCustomBingoGameResource(private val db: MongoDatabase) {
         val items = getItems(bosses)
 
         game.parentCard = squares.map { customSquare ->
-            val square = BingoSquare()
+            val square = BingoSquareMongo()
             square.boss = bosses.find { it.name == customSquare.boss }
             square.item = items.find { it.item == customSquare.item }
             square.task = customSquare.task
@@ -73,12 +73,12 @@ class NewCustomBingoGameResource(private val db: MongoDatabase) {
             if (square.boss != null || square.item != null || square.task != null) {
                 square
             } else {
-                BingoSquare.FreeSquare
+                BingoSquareMongo.FreeSquare
             }
         }
 
-        db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java).insertOne(game)
-        return game
+        db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java).insertOne(game)
+        return game.toModel()
     }
 }
 

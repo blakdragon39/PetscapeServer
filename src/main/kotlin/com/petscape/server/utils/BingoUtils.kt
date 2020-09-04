@@ -12,27 +12,27 @@ import kotlin.random.Random
 const val BINGO_NUM_SQUARES = 25
 private const val FREE_SQUARE = 12
 
-fun getGame(db: MongoDatabase, gameId: ObjectId): BingoGame {
-    val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
+fun getGame(db: MongoDatabase, gameId: ObjectId): BingoGameMongo {
+    val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
     return games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
 }
 
-fun getCard(db: MongoDatabase, gameId: ObjectId, username: String): BingoCard {
+fun getCard(db: MongoDatabase, gameId: ObjectId, username: String): BingoCardMongo {
     val game = getGame(db, gameId)
     return game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
 }
 
-fun generateSquares(type: BingoGameType, freeSpace: Boolean): List<BingoSquare> {
-    val squares = mutableListOf<BingoSquare>()
+fun generateSquares(type: BingoGameType, freeSpace: Boolean): List<BingoSquareMongo> {
+    val squares = mutableListOf<BingoSquareMongo>()
     val choices = getSquareChoices(type).toMutableList()
 
     for (i in 0 until BINGO_NUM_SQUARES) {
         val square = if (freeSpace && i == FREE_SQUARE) {
-            BingoSquare.FreeSquare
+            BingoSquareMongo.FreeSquare
         } else {
             val index = Random.Default.nextInt(choices.size)
             val choice = if (type != BingoGameType.BOSSES) choices.removeAt(index) else choices[index]
-            val square = BingoSquare()
+            val square = BingoSquareMongo()
 
             when (type) {
                 BingoGameType.BOSSES -> square.boss = choice as Boss

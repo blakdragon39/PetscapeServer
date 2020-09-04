@@ -1,10 +1,5 @@
 package com.petscape.server
 
-import com.fasterxml.jackson.core.JsonGenerator
-import com.fasterxml.jackson.core.Version
-import com.fasterxml.jackson.databind.JsonSerializer
-import com.fasterxml.jackson.databind.SerializerProvider
-import com.fasterxml.jackson.databind.module.SimpleModule
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
@@ -21,7 +16,6 @@ import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.bson.codecs.configuration.CodecRegistries
 import org.bson.codecs.pojo.PojoCodecProvider
-import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
@@ -38,16 +32,6 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
     private lateinit var logger: Logger
     private lateinit var database: MongoDatabase
-
-    private val objectIdSerializer = object : JsonSerializer<ObjectId>() {
-        override fun serialize(value: ObjectId, gen: JsonGenerator, serializers: SerializerProvider) {
-            gen.writeString(value.toString())
-        }
-
-        override fun handledType(): Class<ObjectId> {
-            return ObjectId::class.java
-        }
-    }
 
     override fun getName(): String {
         return "petscape-server"
@@ -85,10 +69,5 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(GetCardResource(database))
         environment.jersey().register(GetCardImageResource(database))
         environment.jersey().register(HealthCheckResource(environment.healthChecks()))
-
-        val serializersModule = SimpleModule("serializers", Version.unknownVersion())
-            .addSerializer(objectIdSerializer)
-
-        environment.objectMapper.registerModule(serializersModule)
     }
 }

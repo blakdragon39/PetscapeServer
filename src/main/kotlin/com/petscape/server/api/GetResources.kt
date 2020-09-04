@@ -1,8 +1,7 @@
 package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.models.BingoCard
-import com.petscape.server.models.BingoSquare
+import com.petscape.server.models.*
 import com.petscape.server.utils.FileUtils
 import com.petscape.server.utils.getCard
 import com.petscape.server.utils.getGame
@@ -28,8 +27,9 @@ class GetCardResource(private val db: MongoDatabase) {
 
     @GET
     fun getCard(@QueryParam("game_id") @NotNull gameId: ObjectId,
-                @QueryParam("username") @NotEmpty username: String): BingoCard {
-        return getCard(db, gameId, username)
+                @QueryParam("username") @NotEmpty username: String): BingoCardModel {
+        val mongoCard = getCard(db, gameId, username)
+        return mongoCard.toModel()
     }
 }
 
@@ -57,7 +57,7 @@ class GetCardImageResource(private val db: MongoDatabase) {
                 .encoding("image/png").build()
     }
 
-    private fun generateImage(card: BingoCard): ByteArray {
+    private fun generateImage(card: BingoCardMongo): ByteArray {
         val image = BufferedImage(imageSize, imageSize, BufferedImage.TYPE_INT_ARGB)
         var x = 1
         var y = 1
@@ -88,7 +88,7 @@ class GetCardImageResource(private val db: MongoDatabase) {
         return baos.toByteArray()
     }
 
-    private fun generateSquareImage(square: BingoSquare): BufferedImage {
+    private fun generateSquareImage(square: BingoSquareMongo): BufferedImage {
         val image = BufferedImage(squareSize, squareSize, BufferedImage.TYPE_INT_ARGB)
         image.createGraphics().apply {
             if (square.completed) {
@@ -213,8 +213,8 @@ class GetCardImageResource(private val db: MongoDatabase) {
 class GetWinnersResource(private val db: MongoDatabase) {
 
     @GET
-    fun getWinners(@QueryParam("game_id") @NotNull gameId: ObjectId): List<BingoCard> {
+    fun getWinners(@QueryParam("game_id") @NotNull gameId: ObjectId): List<BingoCardModel> {
         val game = getGame(db, gameId)
-        return game.winners()
+        return game.winners().map { it.toModel() }
     }
 }

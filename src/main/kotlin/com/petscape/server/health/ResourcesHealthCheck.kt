@@ -8,18 +8,25 @@ import java.io.FileNotFoundException
 class ResourcesHealthCheck : HealthCheck() {
 
     override fun check(): Result {
-        val bosses = Boss.values()
-
-        for (boss in bosses) {
+        for (boss in Boss.values()) {
             try {
-                FileUtils.loadBoss(boss)
+                if (boss.file.isEmpty()) {
+                    return Result.unhealthy("File not found for ${boss.name}")
+                } else {
+                    FileUtils.loadBoss(boss)
+                }
             } catch (e: FileNotFoundException) {
                 return Result.unhealthy("File not found for ${boss.name}")
             }
 
             for (dropPair in boss.drops) {
+                val drop = dropPair.first
                 try {
-                    FileUtils.loadDrop(dropPair.first)
+                    if (drop.file.isEmpty()) {
+                        return Result.unhealthy("File not found for ${dropPair.first.item}")
+                    } else {
+                        FileUtils.loadDrop(drop)
+                    }
                 } catch (e: FileNotFoundException) {
                     return Result.unhealthy("File not found for ${dropPair.first.item}")
                 }

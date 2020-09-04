@@ -1,7 +1,9 @@
 package com.petscape.server.utils
 
 import com.petscape.server.models.Boss
+import com.petscape.server.models.BossModel
 import com.petscape.server.models.Drop
+import com.petscape.server.models.DropModel
 import java.io.File
 import java.io.InputStream
 import java.nio.file.Paths
@@ -15,7 +17,15 @@ object FileUtils {
         return load("bosses$s${boss.file}")
     }
 
+    fun loadBoss(boss: BossModel): InputStream {
+        return load("bosses$s${boss.file}")
+    }
+
     fun loadDrop(drop: Drop): InputStream {
+        return load("items$s${drop.file}")
+    }
+
+    fun loadDrop(drop: DropModel): InputStream {
         return load("items$s${drop.file}")
     }
 

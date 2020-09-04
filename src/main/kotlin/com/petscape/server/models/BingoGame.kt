@@ -18,24 +18,35 @@ val WINNING_LINES = listOf(
         listOf(0, 6, 12, 18, 24),
         listOf(4, 8, 12, 16, 20))
 
-class BingoGame {
+class BingoGameMongo {
     @BsonId var id = ObjectId()
     var name: String? = null
-    var cards: MutableList<BingoCard> = mutableListOf()
+    var cards: MutableList<BingoCardMongo> = mutableListOf()
     var type = BingoGameType.OTHER
     var freeSpace = true
 
-    var parentCard: List<BingoSquare>? = null //if it exists, all new cards use this as a template
+    var parentCard: List<BingoSquareMongo>? = null //if it exists, all new cards use this as a template
 
-    fun winners(): List<BingoCard> {
+    fun winners(): List<BingoCardMongo> {
         return cards.filter { it.isWinner() }
     }
+
+    fun toModel(): BingoGameModel = BingoGameModel(this)
 }
 
-class BingoCard {
+class BingoGameModel(bingoGameMongo: BingoGameMongo) {
+    val id: String = bingoGameMongo.id.toString()
+    val name: String? = bingoGameMongo.name
+    val cards: List<BingoCardModel> = bingoGameMongo.cards.map { it.toModel() }
+    val type: BingoGameType = bingoGameMongo.type
+    val freeSpace: Boolean = bingoGameMongo.freeSpace
+    val parentCard: List<BingoSquareModel>? = bingoGameMongo.parentCard?.map { it.toModel() }
+}
+
+class BingoCardMongo {
     @BsonId var id = ObjectId()
     var username: String? = null
-    var squares: List<BingoSquare>? = null
+    var squares: List<BingoSquareMongo>? = null
     var notes = ""
 
     fun isWinner(): Boolean {
@@ -43,11 +54,20 @@ class BingoCard {
             inds.all { i -> squares?.get(i)?.completed == true }
         }
     }
+
+    fun toModel(): BingoCardModel = BingoCardModel(this)
 }
 
-class BingoSquare {
+class BingoCardModel(bingoCardMongo: BingoCardMongo) {
+    val id: String = bingoCardMongo.id.toString()
+    val username: String? = bingoCardMongo.username
+    var squares: List<BingoSquareModel>? = bingoCardMongo.squares?.map { it.toModel() }
+    var notes: String = bingoCardMongo.notes
+}
+
+class BingoSquareMongo {
     companion object {
-        val FreeSquare = BingoSquare().apply {
+        val FreeSquare = BingoSquareMongo().apply {
             completed = true
         }
     }
@@ -57,6 +77,16 @@ class BingoSquare {
     var item: Drop? = null
     var task: String? = null
     var completed = false
+
+    fun toModel(): BingoSquareModel = BingoSquareModel(this)
+}
+
+class BingoSquareModel(bingoSquareMongo: BingoSquareMongo) {
+    val id: String = bingoSquareMongo.id.toString()
+    val boss: BossModel? = bingoSquareMongo.boss?.toModel()
+    val item: DropModel? = bingoSquareMongo.item?.toModel()
+    val task: String? = bingoSquareMongo.task
+    val completed: Boolean = bingoSquareMongo.completed
 }
 
 enum class BingoGameType { BOSSES, ITEMS, COMBINED, OTHER }

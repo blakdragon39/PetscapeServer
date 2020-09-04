@@ -2,7 +2,7 @@ package com.petscape.server.api
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
-import com.petscape.server.models.BingoGame
+import com.petscape.server.models.BingoGameMongo
 import javax.annotation.security.PermitAll
 import javax.ws.rs.GET
 import javax.ws.rs.Path
@@ -16,7 +16,7 @@ class ListAllGamesResource(private val db: MongoDatabase) {
 
     @GET
     fun listAllGames(): List<LiteBingoGame> {
-        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGame::class.java)
+        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
         return games.find().toList()
                 .map { LiteBingoGame(it.id.toString(), it.name ?: it.id.toString()) }
     }

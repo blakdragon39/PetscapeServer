@@ -1,15 +1,19 @@
 package com.petscape.server.models
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.petscape.server.models.BossTag.*
 import com.petscape.server.models.Drop.*
+
+class BossModel(boss: Boss) {
+    val displayName = boss.displayName
+    val file = boss.file
+}
 
 enum class Boss(
     val displayName: String,
     val file: String,
-    @JsonIgnore val slayerLevel: Int? = null,
-    @JsonIgnore val drops: List<Pair<Drop, Int>>,
-    @JsonIgnore val tags: List<BossTag> = emptyList()
+    val slayerLevel: Int? = null,
+    val drops: List<Pair<Drop, Int>>,
+    val tags: List<BossTag> = emptyList()
 ) {
 
     //TODO how to deal with gauntlet and its weird drop rates
@@ -236,18 +240,30 @@ enum class Boss(
     ),
     nightmare(
         displayName = "The Nightmare",
-        file = "",
-        drops = listOf(), //todo
+        file = "nightmare.png",
+        drops = listOf(
+            Pair(nightmareStaff, 400),
+            Pair(inquisitorsGreatHelm, 600),
+            Pair(inquisitorsHauberk, 600),
+            Pair(inquisitorsPlateskirt, 600),
+            Pair(inquisitorsMace, 1200),
+            Pair(eldritchOrb, 1800),
+            Pair(harmonisedOrb, 1800),
+            Pair(volatileOrb, 1800),
+            Pair(eliteClueScroll, 200),
+            Pair(jarOfDreams, 2000),
+            Pair(littleNightmare, 4000)
+        ),
         tags = listOf(GROUP)
     ),
     sarachnis(
         displayName = "Sarachnis",
         file = "sarachnis.png",
         drops = listOf(
-            Pair(jarOfEyes, 0), //todo
-            Pair(sarachnisCudgel, 0),  //todo
-            Pair(sraracha, 0),  //todo
-            Pair(eliteClueScroll, 0)  //todo
+            Pair(jarOfEyes, 2000),
+            Pair(sarachnisCudgel, 384),
+            Pair(sraracha, 3000),
+            Pair(eliteClueScroll, 60)
         )
     ),
     scorpia(
@@ -321,5 +337,7 @@ enum class Boss(
             Pair(petSnakeling, 4000)
         ),
         tags = listOf(SOLO)
-    )
+    );
+
+    fun toModel(): BossModel = BossModel(this)
 }
