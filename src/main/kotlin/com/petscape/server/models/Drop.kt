@@ -2,6 +2,7 @@ package com.petscape.server.models
 
 import com.petscape.server.models.DropTag.*
 
+@Suppress("unused")
 class DropModel(drop: Drop) {
     val item = drop.item
     val file = drop.file
@@ -12,481 +13,481 @@ enum class Drop(
     val file: String,
     val tags: List<DropTag> = emptyList()
 ) {
-    abyssalBludgeon(
+    AbyssalBludgeon(
         "Abyssal Bludgeon",
         "abyssal_bludgeon.png"
     ),
-    abyssalDagger(
+    AbyssalDagger(
         "Abyssal Dagger",
         "abyssal_dagger.png"
     ),
-    abyssalHead(
+    AbyssalHead(
         "Abyssal Head",
         "abyssal_head.png"
     ),
-    abyssalOrphan(
+    AbyssalOrphan(
         "Abyssal Orphan",
         "abyssal_orphan.png",
         listOf(PET)
     ),
-    abyssalWhip(
+    AbyssalWhip(
         "Abyssal Whip",
         "abyssal_whip.png"
     ),
-    alchemicalHydraHeads(
+    AlchemicalHydraHeads(
         "Alchemical Hydra Heads",
         "alchemical_hydra_heads.png",
         listOf(HEAD)
     ),
-    arcaneSigil(
+    ArcaneSigil(
         "Arcane Sigil",
         "arcane_sigil.png"
     ),
-    archersRing(
+    ArchersRing(
         "Archers Ring",
         "archers_ring.png"
     ),
-    armadylChainskirt(
+    ArmadylChainskirt(
         "Armadyl Chainskirt",
         "armadyl_chainskirt.png"
     ),
-    armadylChestplate(
+    ArmadylChestplate(
         "Armadyl Chestplate",
         "armadyl_chestplate.png"
     ),
-    armadylCrossbow(
+    ArmadylCrossbow(
         "Armadyl Crossbow",
         "armadyl_crossbow.png"
     ),
-    armadylHelmet(
+    ArmadylHelmet(
         "Armadyl Helmet",
         "armadyl_helmet.png"
     ),
-    armadylHilt(
+    ArmadylHilt(
         "Armadyl Hilt",
         "armadyl_hilt.png"
     ),
-    bandosBoots(
+    BandosBoots(
         "Bandos Boots",
         "bandos_boots.png"
     ),
-    bandosChestplate(
+    BandosChestplate(
         "Bandos Chestplate",
         "bandos_chestplate.png"
     ),
-    bandosHilt(
+    BandosHilt(
         "Bandos Hilt",
         "bandos_hilt.png"
     ),
-    bandosTassets(
+    BandosTassets(
         "Bandos Tassets",
         "bandos_tassets.png"
     ),
-    berserkerRing(
+    BerserkerRing(
         "Berserker Ring",
         "berserker_ring.png"
     ),
-    blackTourmalineCore(
+    BlackTourmalineCore(
         "Black Tourmaline Core",
         "black_tourmaline_core.png"
     ),
-    brimstoneRing(
+    BrimstoneRing(
         "Brimstone Ring",
         "brimstone_ring.png"
     ),
-    callistoCub(
+    CallistoCub(
         "Callisto Cub",
         "callisto_cub.png",
         listOf(PET)
     ),
-    chaosElementalJr(
+    ChaosElementalJr(
         "Chaos Elemental Jr.",
         "chaos_elemental_jr.png",
         listOf(PET)
     ),
-    dagannothPrimeJr(
+    DagannothPrimeJr(
         "Dagannoth Prime Jr.",
         "dagannoth_prime_jr.png",
         listOf(PET)
     ),
-    dagannothRexJr(
+    DagannothRexJr(
         "Dagannoth Rex Jr.",
         "dagannoth_rex_jr.png",
         listOf(PET)
     ),
-    dagannothSupremeJr(
+    DagannothSupremeJr(
         "Dagannoth Supreme Jr.",
         "dagannoth_supreme_jr.png",
         listOf(PET)
     ),
-    draconicVisage(
+    DraconicVisage(
         "Draconic Visage",
         "draconic_visage.png"
     ),
-    dragon2hSword(
+    Dragon2hSword(
         "Dragon 2h Sword",
         "dragon_2h_sword.png"
     ),
-    dragonAxe(
+    DragonAxe(
         "Dragon Axe",
         "dragon_axe.png"
     ),
-    dragonboneNecklace(
+    DragonboneNecklace(
         "Dragonbone Necklace",
         "dragonbone_necklace.png"
     ),
-    dragonChainbody(
+    DragonChainbody(
         "Dragon Chainbody",
         "dragon_chainbody.png"
     ),
-    dragonPickaxe(
+    DragonPickaxe(
         "Dragon Pickaxe",
         "dragon_pickaxe.png"
     ),
-    eldritchOrb(
+    EldritchOrb(
         "Eldritch Orb",
         "eldritch_orb.png"
     ),
-    eliteClueScroll(
+    EliteClueScroll(
         "Clue Scroll (Elite)",
         "clue_scroll_elite.png",
         listOf(CLUE)
     ),
-    elysianSigil(
+    ElysianSigil(
         "Elysian Sigil",
         "elysian_sigil.png"
     ),
-    eternalCrystal(
+    EternalCrystal(
         "Eternal Crystal",
         "eternal_crystal.png"
     ),
-    generalGraardorJr(
+    GeneralGraardorJr(
         "General Graardor Jr.",
         "general_graardor_jr.png",
         listOf(PET)
     ),
-    graniteGloves(
+    GraniteGloves(
         "Granite Gloves",
         "granite_gloves.png"
     ),
-    graniteHammer(
+    GraniteHammer(
         "Granite Hammer",
         "granite_hammer.png"
     ),
-    graniteRing(
+    GraniteRing(
         "Granite Ring",
         "granite_ring.png"
     ),
-    harmonisedOrb(
+    HarmonisedOrb(
         "Harmonised Orb",
         "harmonised_orb.png"
     ),
-    hellpuppy(
+    Hellpuppy(
         "Hellpuppy",
         "hellpuppy.png",
         listOf(PET)
     ),
-    holyElixir(
+    HolyElixir(
         "Holy Elixir",
         "holy_elixir.png"
     ),
-    hydraLeather(
+    HydraLeather(
         "Hydra Leather",
         "hydra_leather.png"
     ),
-    hydrasClaw(
+    HydrasClaw(
         "Hydra's Claw",
         "hydras_claw.png"
     ),
-    hydraTail(
+    HydraTail(
         "Hydra Tail",
         "hydra_tail.png"
     ),
-    ikkleHydra(
+    IkkleHydra(
         "Ikkle Hydra",
         "ikkle_hydra.png",
         listOf(PET)
     ),
-    inquisitorsGreatHelm(
+    InquisitorsGreatHelm(
         "Inquisitor's Great Helm",
         "inquisitors_great_helm.png"
     ),
-    inquisitorsHauberk(
+    InquisitorsHauberk(
         "Inquisitor's Hauberk",
         "inquisitors_hauberk.png"
     ),
-    inquisitorsPlateskirt(
+    InquisitorsPlateskirt(
         "Inquisitor's Plateskirt",
         "inquisitors_plateskirt.png"
     ),
-    inquisitorsMace(
+    InquisitorsMace(
         "Inquisitor's Mace",
         "inquisitors_mace.png"
     ),
-    jarOfChemicals(
+    JarOfChemicals(
         "Jar of Chemicals",
         "jar_of_chemicals.png",
         listOf(JAR)
     ),
-    jarOfDecay(
+    JarOfDecay(
         "Jar of Decay",
         "jar_of_decay.png",
         listOf(JAR)
     ),
-    jarOfDirt(
+    JarOfDirt(
         "Jar of Dirt",
         "jar_of_dirt.png",
         listOf(JAR)
     ),
-    jarOfDreams(
+    JarOfDreams(
         "Jar of Dreams",
         "jar_of_dreams.png",
         listOf(JAR)
     ),
-    jarOfEyes(
+    JarOfEyes(
         "Jar of Eyes",
         "jar_of_eyes.png",
         listOf(JAR)
     ),
-    jarOfMiasma(
+    JarOfMiasma(
         "Jar of Miasma",
         "jar_of_miasma.png",
         listOf(JAR)
     ),
-    jarOfSand(
+    JarOfSand(
         "Jar of Sand",
         "jar_of_sand.png",
         listOf(JAR)
     ),
-    jarOfSouls(
+    JarOfSouls(
         "Jar of Souls",
         "jar_of_souls.png",
         listOf(JAR)
     ),
-    jarOfStone(
+    JarOfStone(
         "Jar of Stone",
         "jar_of_stone.png",
         listOf(JAR)
     ),
-    jarOfSwamp(
+    JarOfSwamp(
         "Jar of Swamp",
         "jar_of_swamp.png",
         listOf(JAR)
     ),
-    kalphitePrincess(
+    KalphitePrincess(
         "Kalphite Princess",
         "kalphite_princess.png",
         listOf(PET)
     ),
-    kbdHeads(
+    KbdHeads(
         "KBD Heads",
         "kbd_heads.png",
         listOf(HEAD)
     ),
-    kqHead(
+    KqHead(
         "KQ Head",
         "kq_head.png",
         listOf(HEAD)
     ),
-    krakenTentacle(
+    KrakenTentacle(
         "Kraken Tentacle",
         "kraken_tentacle.png"
     ),
-    kreeArraJr(
+    KreeArraJr(
         "Kree'Arra Jr.",
         "kree_arra_jr.png",
         listOf(PET)
     ),
-    krilTsutsarothJr(
+    KrilTsutsarothJr(
         "Kril Tsutsaroth Jr.",
         "kril_tsutsaroth_jr.png",
         listOf(PET)
     ),
-    littleNightmare(
+    LittleNightmare(
         "Little Nightmare",
         "little_nightmare.png",
         listOf(PET)
     ),
-    magicFang(
+    MagicFang(
         "Magic Fang",
         "magic_fang.png"
     ),
-    maledictionShard3(
+    MaledictionShard3(
         "Malediction Shard 3",
         "malediction_shard_3.png"
     ),
-    mudBattlestaff(
+    MudBattlestaff(
         "Mud Battlestaff",
         "mud_battlestaff.png"
     ),
-    nightmareStaff(
+    NightmareStaff(
         "Nightmare Staff",
         "nightmare_staff.png"
     ),
-    noon(
+    Noon(
         "Noon",
         "noon.png",
         listOf(PET)
     ),
-    occultNecklace(
+    OccultNecklace(
         "Occult Necklace",
         "occult_necklace.png"
     ),
-    odiumShard3(
+    OdiumShard3(
         "Odium Shard 3",
         "odium_shard_3.png"
     ),
-    pegasianCrystal(
+    PegasianCrystal(
         "Pegasian Crystal",
         "pegasian_crystal.png"
     ),
-    petDarkCore(
+    PetDarkCore(
         "Pet Dark Core",
         "pet_dark_core.png",
         listOf(PET)
     ),
-    petKraken(
+    PetKraken(
         "Pet Kraken",
         "pet_kraken.png",
         listOf(PET)
     ),
-    petSmokeDevil(
+    PetSmokeDevil(
         "Pet Smoke Devil",
         "pet_smoke_devil.png",
         listOf(PET)
     ),
-    petSnakeling(
+    PetSnakeling(
         "Pet snakeling",
         "pet_snakeling.png",
         listOf(PET)
     ),
-    primordialCrystal(
+    PrimordialCrystal(
         "Primordial Crystal",
         "primordial_crystal.png"
     ),
-    princeBlackDragon(
+    PrinceBlackDragon(
         "Prince Black Dragon",
         "prince_black_dragon.png",
         listOf(PET)
     ),
-    ringOfTheGods(
+    RingOfTheGods(
         "Ring of the Gods",
         "ring_of_the_gods.png"
     ),
-    sarachnisCudgel(
+    SarachnisCudgel(
         "Sarachnis Cudgel",
         "sarachnis_cudgel.png"
     ),
-    saradominHilt(
+    SaradominHilt(
         "Saradomin Hilt",
         "saradomin_hilt.png"
     ),
-    saradominsLight(
+    SaradominsLight(
         "Saradomin's Light",
         "saradomins_light.png"
     ),
-    saradominSword(
+    SaradominSword(
         "Saradomin Sword",
         "saradomin_sword.png"
     ),
-    scorpiasOffspring(
+    ScorpiasOffspring(
         "Scorpia's Offspring",
         "scorpias_offspring.png",
         listOf(PET)
     ),
-    serpentineVisage(
+    SerpentineVisage(
         "Serpentine Visage",
         "serpentine_visage.png"
     ),
-    smokeBattlestaff(
+    SmokeBattlestaff(
         "Smoke Battlestaff",
         "smoke_battlestaff.png"
     ),
-    sraracha(
+    Sraracha(
         "Sraracha",
         "sraracha.png",
         listOf(PET)
     ),
-    seerCull(
+    SeerCull(
         "Seercull",
         "seercull.png"
     ),
-    seersRing(
+    SeersRing(
         "Seers Ring",
         "seers_ring.png"
     ),
-    smoulderingStone(
+    SmoulderingStone(
         "Smouldering Stone",
         "smouldering_stone.png"
     ),
-    spectralSigil(
+    SpectralSigil(
         "Spectral Sigil",
         "spectral_sigil.png"
     ),
-    spiritShield(
+    SpiritShield(
         "Spirit Shield",
         "spirit_shield.png"
     ),
-    staffOfTheDead(
+    StaffOfTheDead(
         "Staff of the Dead",
         "staff_of_the_dead.png"
     ),
-    steamBattlestaff(
+    SteamBattlestaff(
         "Steam Battlestaff",
         "steam_battlestaff.png"
     ),
-    tanzaniteFang(
+    TanzaniteFang(
         "Tanzanite Fang",
         "tanzanite_fang.png"
     ),
-    treasonousRing(
+    TreasonousRing(
         "Treasonous Ring",
         "treasonous_ring.png"
     ),
-    tridentOfTheSeas(
+    TridentOfTheSeas(
         "Trident of the Seas",
         "trident_of_the_seas.png"
     ),
-    tyrannicalRing(
+    TyrannicalRing(
         "Tyrannical Ring",
         "tyrannical_ring.png"
     ),
-    uncutOnyx(
+    UncutOnyx(
         "Uncut Onyx",
         "uncut_onyx.png"
     ),
-    venenatisSpiderling(
+    VenenatisSpiderling(
         "Venenatis Spiderling",
         "venenatis_spiderling.png",
         listOf(PET)
     ),
-    vetionJr(
+    VetionJr(
         "Vet'ion Jr.",
         "vetion_jr.png",
         listOf(PET)
     ),
-    volatileOrb(
+    VolatileOrb(
         "Volatile Orb",
         "volatile_orb.png"
     ),
-    vorki(
+    Vorki(
         "Vorki",
         "vorki.png",
         listOf(PET)
     ),
-    warriorring(
+    WarriorRing(
         "Warrior Ring",
         "warrior_ring.png"
     ),
-    zamorakHilt(
+    ZamorakHilt(
         "Zamorak Hilt",
         "zamorak_hilt.png"
     ),
-    zamorakianSpear(
+    ZamorakianSpear(
         "Zamorakian Spear",
         "zamorakian_spear.png"
     ),
-    zilyanaJr(
+    ZilyanaJr(
         "Zilyana Jr.",
         "zilyana_jr.png",
         listOf(PET)

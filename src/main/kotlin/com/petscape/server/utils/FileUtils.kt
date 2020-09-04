@@ -1,9 +1,7 @@
 package com.petscape.server.utils
 
 import com.petscape.server.models.Boss
-import com.petscape.server.models.BossModel
 import com.petscape.server.models.Drop
-import com.petscape.server.models.DropModel
 import java.io.File
 import java.io.InputStream
 import java.nio.file.Paths
@@ -17,43 +15,17 @@ object FileUtils {
         return load("bosses$s${boss.file}")
     }
 
-    fun loadBoss(boss: BossModel): InputStream {
-        return load("bosses$s${boss.file}")
-    }
-
     fun loadDrop(drop: Drop): InputStream {
         return load("items$s${drop.file}")
     }
 
-    fun loadDrop(drop: DropModel): InputStream {
-        return load("items$s${drop.file}")
-    }
-
-    fun load(name: String): InputStream {
+    private fun load(name: String): InputStream {
         return try {
             javaClass.classLoader.getResourceAsStream(name)!!
         } catch (e: Exception) {
             val f = goUp(File(javaClass.getResource(s).path))
 
             Paths.get(f.path, "src${s}main${s}resources${s}", name).toUri().toURL().openStream()
-        }
-    }
-
-    fun findBoss(boss: Boss): String? {
-        return find("bosses${s}${boss.file}")
-    }
-
-    fun findDrop(drop: Drop): String? {
-        return find("items${s}${drop.file}")
-    }
-
-    fun find(name: String): String? {
-        return try {
-            javaClass.classLoader.getResource(name)?.toString()!!
-        } catch (e: Exception) {
-            val f = goUp(File(javaClass.getResource(s).path))
-
-            Paths.get(f.path, "src${s}main${s}resources${s}", name).toUri().toString()
         }
     }
 

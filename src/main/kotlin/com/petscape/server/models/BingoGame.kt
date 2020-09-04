@@ -34,6 +34,7 @@ class BingoGameMongo {
     fun toModel(): BingoGameModel = BingoGameModel(this)
 }
 
+@Suppress("unused")
 class BingoGameModel(bingoGameMongo: BingoGameMongo) {
     val id: String = bingoGameMongo.id.toString()
     val name: String? = bingoGameMongo.name
@@ -58,6 +59,7 @@ class BingoCardMongo {
     fun toModel(): BingoCardModel = BingoCardModel(this)
 }
 
+@Suppress("unused")
 class BingoCardModel(bingoCardMongo: BingoCardMongo) {
     val id: String = bingoCardMongo.id.toString()
     val username: String? = bingoCardMongo.username
@@ -81,6 +83,7 @@ class BingoSquareMongo {
     fun toModel(): BingoSquareModel = BingoSquareModel(this)
 }
 
+@Suppress("unused")
 class BingoSquareModel(bingoSquareMongo: BingoSquareMongo) {
     val id: String = bingoSquareMongo.id.toString()
     val boss: BossModel? = bingoSquareMongo.boss?.toModel()

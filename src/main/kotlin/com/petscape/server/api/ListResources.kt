@@ -22,4 +22,5 @@ class ListAllGamesResource(private val db: MongoDatabase) {
     }
 }
 
+@Suppress("unused")
 class LiteBingoGame(val id: String, val name: String)

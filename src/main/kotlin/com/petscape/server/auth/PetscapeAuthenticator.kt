@@ -4,7 +4,6 @@ import com.mongodb.client.MongoDatabase
 import com.petscape.server.PetscapeConfiguration
 import io.dropwizard.auth.Authenticator
 import io.dropwizard.auth.basic.BasicCredentials
-import org.eclipse.jetty.server.Authentication
 import java.util.*
 
 class PetscapeAuthenticator(private val db: MongoDatabase,

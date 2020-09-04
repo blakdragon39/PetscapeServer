@@ -2,7 +2,6 @@ package com.petscape.server.health
 
 import com.codahale.metrics.health.HealthCheck
 import com.codahale.metrics.health.HealthCheckRegistry
-import javax.annotation.security.PermitAll
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.Produces

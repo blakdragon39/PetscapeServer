@@ -3,6 +3,7 @@ package com.petscape.server.models
 import com.petscape.server.models.BossTag.*
 import com.petscape.server.models.Drop.*
 
+@Suppress("unused")
 class BossModel(boss: Boss) {
     val displayName = boss.displayName
     val file = boss.file
@@ -23,318 +24,318 @@ enum class Boss(
     //TODO raids 1/2
     //TODO Wintertodt - tagged as minigame
     
-    abyssalSire(
+    AbyssalSire(
         displayName = "Abyssal Sire",
         file = "abyssal_sire.png",
         slayerLevel = 85,
         drops = listOf(
-            Pair(abyssalBludgeon, 206),
-            Pair(abyssalDagger, 492),
-            Pair(abyssalHead, 1280),
-            Pair(abyssalWhip, 1066),
-            Pair(eliteClueScroll, 180),
-            Pair(jarOfMiasma, 984),
-            Pair(abyssalOrphan, 2560)
+            Pair(AbyssalBludgeon, 206),
+            Pair(AbyssalDagger, 492),
+            Pair(AbyssalHead, 1280),
+            Pair(AbyssalWhip, 1066),
+            Pair(EliteClueScroll, 180),
+            Pair(JarOfMiasma, 984),
+            Pair(AbyssalOrphan, 2560)
         ),
         tags = listOf(SLAYER, SOLO)
     ),
-    alchemicalHydra(
+    AlchemicalHydra(
         displayName = "Alchemical Hydra",
         file = "alchemical_hydra.png",
         slayerLevel = 95,
         drops = listOf(
-            Pair(alchemicalHydraHeads, 256),
-            Pair(brimstoneRing, 180),
-            Pair(hydraLeather, 512),
-            Pair(hydraTail, 512),
-            Pair(hydrasClaw, 1000),
-            Pair(eliteClueScroll, 256),
-            Pair(jarOfChemicals, 2000),
-            Pair(ikkleHydra, 3000)
+            Pair(AlchemicalHydraHeads, 256),
+            Pair(BrimstoneRing, 180),
+            Pair(HydraLeather, 512),
+            Pair(HydraTail, 512),
+            Pair(HydrasClaw, 1000),
+            Pair(EliteClueScroll, 256),
+            Pair(JarOfChemicals, 2000),
+            Pair(IkkleHydra, 3000)
         ),
         tags = listOf(SLAYER, SOLO)
     ),
-    callisto(
+    Callisto(
         displayName = "Callisto",
         file = "callisto.png",
         drops = listOf(
-            Pair(tyrannicalRing, 512),
-            Pair(dragon2hSword, 256),
-            Pair(dragonPickaxe, 171),
-            Pair(eliteClueScroll, 100),
-            Pair(callistoCub, 2000)
+            Pair(TyrannicalRing, 512),
+            Pair(Dragon2hSword, 256),
+            Pair(DragonPickaxe, 171),
+            Pair(EliteClueScroll, 100),
+            Pair(CallistoCub, 2000)
         ),
         tags = listOf(WILDERNESS)
     ),
-    cerberus(
+    Cerberus(
         displayName = "Cerberus",
         file = "cerberus.png",
         slayerLevel = 91,
         drops = listOf(
-            Pair(primordialCrystal, 512),
-            Pair(pegasianCrystal, 512),
-            Pair(eternalCrystal, 512),
-            Pair(smoulderingStone, 512),
-            Pair(eliteClueScroll, 100),
-            Pair(jarOfSouls, 2000),
-            Pair(hellpuppy, 3000)
+            Pair(PrimordialCrystal, 512),
+            Pair(PegasianCrystal, 512),
+            Pair(EternalCrystal, 512),
+            Pair(SmoulderingStone, 512),
+            Pair(EliteClueScroll, 100),
+            Pair(JarOfSouls, 2000),
+            Pair(Hellpuppy, 3000)
         ),
         tags = listOf(SLAYER, SOLO)
     ),
-    chaosElemental(
+    ChaosElemental(
         displayName = "Chaos Elemental",
         file = "chaos_elemental.png",
         drops = listOf(
-            Pair(dragon2hSword, 128),
-            Pair(dragonPickaxe, 128),
-            Pair(eliteClueScroll, 200),
-            Pair(chaosElementalJr, 300)
+            Pair(Dragon2hSword, 128),
+            Pair(DragonPickaxe, 128),
+            Pair(EliteClueScroll, 200),
+            Pair(ChaosElementalJr, 300)
         ),
         tags = listOf(WILDERNESS)
     ),
-    commanderZilyana(
+    CommanderZilyana(
         displayName = "Commander Zilyana",
         file = "zilyana.png",
         drops = listOf(
-            Pair(saradominHilt, 508),
-            Pair(saradominSword, 127),
-            Pair(armadylCrossbow, 508),
-            Pair(saradominsLight, 254),
-            Pair(zilyanaJr, 5000),
-            Pair(eliteClueScroll, 250)
+            Pair(SaradominHilt, 508),
+            Pair(SaradominSword, 127),
+            Pair(ArmadylCrossbow, 508),
+            Pair(SaradominsLight, 254),
+            Pair(ZilyanaJr, 5000),
+            Pair(EliteClueScroll, 250)
         )
     ),
-    corporealBeast(
+    CorporealBeast(
         displayName = "Corporeal Beast",
         file = "corporeal_beast.png",
         drops = listOf(
-            Pair(eliteClueScroll, 200),
-            Pair(arcaneSigil, 1365),
-            Pair(elysianSigil, 4095),
-            Pair(holyElixir, 170),
-            Pair(petDarkCore, 5000),
-            Pair(spectralSigil, 1365),
-            Pair(spiritShield, 64)
+            Pair(EliteClueScroll, 200),
+            Pair(ArcaneSigil, 1365),
+            Pair(ElysianSigil, 4095),
+            Pair(HolyElixir, 170),
+            Pair(PetDarkCore, 5000),
+            Pair(SpectralSigil, 1365),
+            Pair(SpiritShield, 64)
         ),
         tags = listOf(GROUP)
     ),
-    dagannothPrime(
+    DagannothPrime(
         displayName = "Dagannoth Prime",
         file = "dagannoth_prime.png",
         drops = listOf(
-            Pair(seersRing, 128),
-            Pair(mudBattlestaff, 128),
-            Pair(dragonAxe, 128),
-            Pair(eliteClueScroll, 750),
-            Pair(dagannothPrimeJr, 5000)
+            Pair(SeersRing, 128),
+            Pair(MudBattlestaff, 128),
+            Pair(DragonAxe, 128),
+            Pair(EliteClueScroll, 750),
+            Pair(DagannothPrimeJr, 5000)
         )
     ),
-    dagannothRex(
+    DagannothRex(
         displayName = "Dagannoth Rex",
         file = "dagannoth_rex.png",
         drops = listOf(
-            Pair(warriorring, 128),
-            Pair(berserkerRing, 128),
-            Pair(dragonAxe, 128),
-            Pair(eliteClueScroll, 750),
-            Pair(dagannothRexJr, 5000)
+            Pair(WarriorRing, 128),
+            Pair(BerserkerRing, 128),
+            Pair(DragonAxe, 128),
+            Pair(EliteClueScroll, 750),
+            Pair(DagannothRexJr, 5000)
         )
     ),
-    dagannothSupreme(
+    DagannothSupreme(
         displayName = "Dagannoth Supreme",
         file = "dagannoth_supreme.png",
         drops = listOf(
-            Pair(seerCull, 128),
-            Pair(archersRing, 128),
-            Pair(dragonAxe, 128),
-            Pair(eliteClueScroll, 750),
-            Pair(dagannothSupremeJr, 5000)
+            Pair(SeerCull, 128),
+            Pair(ArchersRing, 128),
+            Pair(DragonAxe, 128),
+            Pair(EliteClueScroll, 750),
+            Pair(DagannothSupremeJr, 5000)
         )
     ),
-    generalGraardor(
+    GeneralGraardor(
         displayName = "General Graardor",
         file = "graardor.png",
         drops = listOf(
-            Pair(bandosHilt, 508),
-            Pair(bandosBoots, 384),
-            Pair(bandosChestplate, 384),
-            Pair(bandosTassets, 384),
-            Pair(generalGraardorJr, 5000),
-            Pair(eliteClueScroll, 250)
+            Pair(BandosHilt, 508),
+            Pair(BandosBoots, 384),
+            Pair(BandosChestplate, 384),
+            Pair(BandosTassets, 384),
+            Pair(GeneralGraardorJr, 5000),
+            Pair(EliteClueScroll, 250)
         )
     ),
-    grotesqueGuardians(
+    GrotesqueGuardians(
         displayName = "Grotesque Guardians",
         file = "grotesque_guardians.png",
         slayerLevel = 75,
         drops = listOf(
-            Pair(graniteGloves, 500),
-            Pair(graniteRing, 500),
-            Pair(blackTourmalineCore, 1000),
-            Pair(graniteHammer, 750),
-            Pair(eliteClueScroll, 230),
-            Pair(jarOfStone, 5000),
-            Pair(noon, 3000)
+            Pair(GraniteGloves, 500),
+            Pair(GraniteRing, 500),
+            Pair(BlackTourmalineCore, 1000),
+            Pair(GraniteHammer, 750),
+            Pair(EliteClueScroll, 230),
+            Pair(JarOfStone, 5000),
+            Pair(Noon, 3000)
         ),
         tags = listOf(SLAYER, SOLO)
     ),
-    kalphiteQueen(
+    KalphiteQueen(
         displayName = "Kalphite Queen",
         file = "kalphite_queen.png",
         drops = listOf(
-            Pair(dragonChainbody, 128),
-            Pair(dragon2hSword, 256),
-            Pair(kqHead, 128),
-            Pair(kalphitePrincess, 3000),
-            Pair(eliteClueScroll, 100),
-            Pair(jarOfSand, 2000)
+            Pair(DragonChainbody, 128),
+            Pair(Dragon2hSword, 256),
+            Pair(KqHead, 128),
+            Pair(KalphitePrincess, 3000),
+            Pair(EliteClueScroll, 100),
+            Pair(JarOfSand, 2000)
         )
     ),
-    kingBlackDragon(
+    KingBlackDragon(
         displayName = "King Black Dragon",
         file = "king_black_dragon.png",
         drops = listOf(
-            Pair(dragonPickaxe, 1500),
-            Pair(kbdHeads, 128),
-            Pair(eliteClueScroll, 450),
-            Pair(princeBlackDragon, 3000),
-            Pair(draconicVisage, 5000)
+            Pair(DragonPickaxe, 1500),
+            Pair(KbdHeads, 128),
+            Pair(EliteClueScroll, 450),
+            Pair(PrinceBlackDragon, 3000),
+            Pair(DraconicVisage, 5000)
         )
     ),
-    kraken(
+    Kraken(
         displayName = "Kraken",
         file = "kraken.png",
         slayerLevel = 87,
         drops = listOf(
-            Pair(krakenTentacle, 300),
-            Pair(tridentOfTheSeas, 512),
-            Pair(eliteClueScroll, 500),
-            Pair(jarOfDirt, 1000),
-            Pair(petKraken, 3000)
+            Pair(KrakenTentacle, 300),
+            Pair(TridentOfTheSeas, 512),
+            Pair(EliteClueScroll, 500),
+            Pair(JarOfDirt, 1000),
+            Pair(PetKraken, 3000)
         ),
         tags = listOf(SLAYER, SOLO)
     ),
-    kreeArra(
+    KreeArra(
         displayName = "Kree'Arra",
         file = "kreearra.png",
         drops = listOf(
-            Pair(armadylHilt, 508),
-            Pair(armadylHelmet, 508),
-            Pair(armadylChestplate, 384),
-            Pair(armadylChainskirt, 384),
-            Pair(kreeArraJr, 5000),
-            Pair(eliteClueScroll, 250)
+            Pair(ArmadylHilt, 508),
+            Pair(ArmadylHelmet, 508),
+            Pair(ArmadylChestplate, 384),
+            Pair(ArmadylChainskirt, 384),
+            Pair(KreeArraJr, 5000),
+            Pair(EliteClueScroll, 250)
         )
     ),
-    krilTsutsaroth(
+    KrilTsutsaroth(
         displayName = "Kril Tsutsaroth",
         file = "kril_tsutsaroth.png",
         drops = listOf(
-            Pair(staffOfTheDead, 508),
-            Pair(zamorakHilt, 508),
-            Pair(steamBattlestaff, 128),
-            Pair(zamorakianSpear, 128),
-            Pair(krilTsutsarothJr, 5000),
-            Pair(eliteClueScroll, 250)
+            Pair(StaffOfTheDead, 508),
+            Pair(ZamorakHilt, 508),
+            Pair(SteamBattlestaff, 128),
+            Pair(ZamorakianSpear, 128),
+            Pair(KrilTsutsarothJr, 5000),
+            Pair(EliteClueScroll, 250)
         )
     ),
-    nightmare(
+    Nightmare(
         displayName = "The Nightmare",
         file = "nightmare.png",
         drops = listOf(
-            Pair(nightmareStaff, 400),
-            Pair(inquisitorsGreatHelm, 600),
-            Pair(inquisitorsHauberk, 600),
-            Pair(inquisitorsPlateskirt, 600),
-            Pair(inquisitorsMace, 1200),
-            Pair(eldritchOrb, 1800),
-            Pair(harmonisedOrb, 1800),
-            Pair(volatileOrb, 1800),
-            Pair(eliteClueScroll, 200),
-            Pair(jarOfDreams, 2000),
-            Pair(littleNightmare, 4000)
+            Pair(NightmareStaff, 400),
+            Pair(InquisitorsGreatHelm, 600),
+            Pair(InquisitorsHauberk, 600),
+            Pair(InquisitorsPlateskirt, 600),
+            Pair(InquisitorsMace, 1200),
+            Pair(EldritchOrb, 1800),
+            Pair(HarmonisedOrb, 1800),
+            Pair(VolatileOrb, 1800),
+            Pair(EliteClueScroll, 200),
+            Pair(JarOfDreams, 2000),
+            Pair(LittleNightmare, 4000)
         ),
         tags = listOf(GROUP)
     ),
-    sarachnis(
+    Sarachnis(
         displayName = "Sarachnis",
         file = "sarachnis.png",
         drops = listOf(
-            Pair(jarOfEyes, 2000),
-            Pair(sarachnisCudgel, 384),
-            Pair(sraracha, 3000),
-            Pair(eliteClueScroll, 60)
+            Pair(JarOfEyes, 2000),
+            Pair(SarachnisCudgel, 384),
+            Pair(Sraracha, 3000),
+            Pair(EliteClueScroll, 60)
         )
     ),
-    scorpia(
+    Scorpia(
         displayName = "Scoripia",
         file = "scorpia.png",
         drops = listOf(
-            Pair(maledictionShard3, 256),
-            Pair(odiumShard3, 256),
-            Pair(scorpiasOffspring, 2000)
+            Pair(MaledictionShard3, 256),
+            Pair(OdiumShard3, 256),
+            Pair(ScorpiasOffspring, 2000)
         ),
         tags = listOf(WILDERNESS)
     ),
-    thermonuclearSmokeDevil(
+    ThermonuclearSmokeDevil(
         displayName = "Thermonuclear Smoke Devil",
         file = "thermonuclear_smoke_devil.png",
         slayerLevel = 93,
         drops = listOf(
-            Pair(smokeBattlestaff, 512),
-            Pair(occultNecklace, 350),
-            Pair(dragonChainbody, 2000),
-            Pair(eliteClueScroll, 500),
-            Pair(petSmokeDevil, 3000)
+            Pair(SmokeBattlestaff, 512),
+            Pair(OccultNecklace, 350),
+            Pair(DragonChainbody, 2000),
+            Pair(EliteClueScroll, 500),
+            Pair(PetSmokeDevil, 3000)
         ),
         tags = listOf(SLAYER, SOLO)
     ),
-    venenatis(
+    Venenatis(
         displayName = "Venenatis",
         file = "venenatis.png",
         drops = listOf(
-            Pair(treasonousRing, 512),
-            Pair(dragon2hSword, 256),
-            Pair(dragonPickaxe, 171),
-            Pair(venenatisSpiderling, 2000),
-            Pair(eliteClueScroll, 100)
+            Pair(TreasonousRing, 512),
+            Pair(Dragon2hSword, 256),
+            Pair(DragonPickaxe, 171),
+            Pair(VenenatisSpiderling, 2000),
+            Pair(EliteClueScroll, 100)
         ),
         tags = listOf(WILDERNESS)
     ),
-    vetion(
+    Vetion(
         displayName = "Vet'ion",
         file = "vetion.png",
         drops = listOf(
-            Pair(ringOfTheGods, 512),
-            Pair(dragon2hSword, 256),
-            Pair(dragonPickaxe, 171),
-            Pair(eliteClueScroll, 100),
-            Pair(vetionJr, 2000)
+            Pair(RingOfTheGods, 512),
+            Pair(Dragon2hSword, 256),
+            Pair(DragonPickaxe, 171),
+            Pair(EliteClueScroll, 100),
+            Pair(VetionJr, 2000)
         ),
         tags = listOf(WILDERNESS)
     ),
-    vorkath(
+    Vorkath(
         displayName = "Vorkath",
         file = "vorkath.png",
         drops = listOf(
-            Pair(dragonboneNecklace, 1000),
-            Pair(eliteClueScroll, 65),
-            Pair(jarOfDecay, 3000),
-            Pair(vorki, 3000)
+            Pair(DragonboneNecklace, 1000),
+            Pair(EliteClueScroll, 65),
+            Pair(JarOfDecay, 3000),
+            Pair(Vorki, 3000)
         ),
         tags = listOf(SOLO)
     ),
-    zulrah(
+    Zulrah(
         displayName = "Zulrah",
         file = "zulrah.png",
         drops = listOf(
-            Pair(uncutOnyx, 512),
-            Pair(tanzaniteFang, 512),
-            Pair(magicFang, 512),
-            Pair(serpentineVisage, 512),
-            Pair(eliteClueScroll, 75),
-            Pair(jarOfSwamp, 3000),
-            Pair(petSnakeling, 4000)
+            Pair(UncutOnyx, 512),
+            Pair(TanzaniteFang, 512),
+            Pair(MagicFang, 512),
+            Pair(SerpentineVisage, 512),
+            Pair(EliteClueScroll, 75),
+            Pair(JarOfSwamp, 3000),
+            Pair(PetSnakeling, 4000)
         ),
         tags = listOf(SOLO)
     );

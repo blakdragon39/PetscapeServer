@@ -72,7 +72,6 @@ class GetCardImageResource(private val db: MongoDatabase) {
         }
 
         card.squares?.forEach { square ->
-            println("$x $y ${x + squareSize} ${y + squareSize}")
             val squareImage = generateSquareImage(square)
             image.graphics.drawImage(squareImage, x, y, squareSize, squareSize, null)
 
