@@ -66,7 +66,7 @@ class NewCustomBingoGameResource(private val db: MongoDatabase) {
 
         game.parentCard = squares.map { customSquare ->
             val square = BingoSquareMongo()
-            square.boss = bosses.find { it.name == customSquare.boss }
+            square.boss = bosses.find { it.displayName == customSquare.boss }
             square.item = items.find { it.item == customSquare.item }
             square.task = customSquare.task
 
