@@ -1,11 +1,12 @@
-package com.petscape.server.api
+package com.petscape.server.bingo.api
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
+import com.petscape.server.bingo.models.*
 import com.petscape.server.models.*
-import com.petscape.server.utils.BINGO_NUM_SQUARES
-import com.petscape.server.utils.generateSquares
-import com.petscape.server.utils.getItems
+import com.petscape.server.bingo.BINGO_NUM_SQUARES
+import com.petscape.server.bingo.generateSquares
+import com.petscape.server.bingo.getItems
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.NotNull

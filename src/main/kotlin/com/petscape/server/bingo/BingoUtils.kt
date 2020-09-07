@@ -1,7 +1,11 @@
-package com.petscape.server.utils
+package com.petscape.server.bingo
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
+import com.petscape.server.bingo.models.BingoCardMongo
+import com.petscape.server.bingo.models.BingoGameMongo
+import com.petscape.server.bingo.models.BingoGameType
+import com.petscape.server.bingo.models.BingoSquareMongo
 import com.petscape.server.models.*
 import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById

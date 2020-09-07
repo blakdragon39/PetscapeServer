@@ -1,9 +1,9 @@
-package com.petscape.server.api
+package com.petscape.server.bingo.api
 
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
-import com.petscape.server.models.BingoCardModel
-import com.petscape.server.models.BingoGameMongo
+import com.petscape.server.bingo.models.BingoCardModel
+import com.petscape.server.bingo.models.BingoGameMongo
 import org.bson.types.ObjectId
 import org.litote.kmongo.findOneById
 import org.litote.kmongo.replaceOneById

@@ -1,6 +1,10 @@
-package com.petscape.server.models
+package com.petscape.server.bingo.models
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import com.petscape.server.models.Boss
+import com.petscape.server.models.BossModel
+import com.petscape.server.models.Drop
+import com.petscape.server.models.DropModel
 import org.bson.codecs.pojo.annotations.BsonId
 import org.bson.types.ObjectId
 

@@ -1,10 +1,9 @@
 package com.petscape.server
 
-import com.fasterxml.jackson.core.JsonParser
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.api.*
+import com.petscape.server.bingo.api.*
 import com.petscape.server.auth.PetscapeAuthenticator
 import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
@@ -60,6 +59,9 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.healthChecks().register("resources", ResourcesHealthCheck())
 
         environment.jersey().register(AuthDynamicFeature(auth))
+        environment.jersey().register(HealthCheckResource(environment.healthChecks()))
+
+        //Bingo Resources
         environment.jersey().register(ListAllGamesResource(database))
         environment.jersey().register(ListAllPlayersResource(database))
         environment.jersey().register(NewBingoGameResource(database))
@@ -70,6 +72,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(GetWinnersResource(database))
         environment.jersey().register(GetCardResource(database))
         environment.jersey().register(GetCardImageResource(database))
-        environment.jersey().register(HealthCheckResource(environment.healthChecks()))
+
+        //Leaderboard Resources
     }
 }

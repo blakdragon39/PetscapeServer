@@ -1,10 +1,12 @@
-package com.petscape.server.api
+package com.petscape.server.bingo.api
 
 import com.mongodb.client.MongoDatabase
-import com.petscape.server.models.*
+import com.petscape.server.bingo.models.BingoCardModel
+import com.petscape.server.bingo.models.BingoCardMongo
+import com.petscape.server.bingo.models.BingoSquareMongo
 import com.petscape.server.utils.FileUtils
-import com.petscape.server.utils.getCard
-import com.petscape.server.utils.getGame
+import com.petscape.server.bingo.getCard
+import com.petscape.server.bingo.getGame
 import org.bson.types.ObjectId
 import java.awt.Color
 import java.awt.FontMetrics
