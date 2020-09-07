@@ -9,6 +9,9 @@ import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
 import com.petscape.server.health.HealthCheckResource
 import com.petscape.server.health.ResourcesHealthCheck
+import com.petscape.server.leaderboard.api.AddSubmissionResource
+import com.petscape.server.leaderboard.api.GetLeaderboardGameResource
+import com.petscape.server.leaderboard.api.GetLeaderboardGamesResource
 import com.petscape.server.leaderboard.api.NewLeaderboardGameResource
 import io.dropwizard.Application
 import io.dropwizard.auth.AuthDynamicFeature
@@ -64,8 +67,8 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(HealthCheckResource(environment.healthChecks()))
 
         //Bingo Resources
-        environment.jersey().register(ListAllGamesResource(database))
-        environment.jersey().register(ListAllPlayersResource(database))
+        environment.jersey().register(ListAllBingoGamesResource(database))
+        environment.jersey().register(ListAllBingoPlayersResource(database))
         environment.jersey().register(NewBingoGameResource(database))
         environment.jersey().register(NewCustomBingoGameResource(database))
         environment.jersey().register(AddBingoCardResource(database))
@@ -78,12 +81,11 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         //Leaderboard Resources
         /*
         TODO
-        - list leaderboard games
-        - show leaderboard state (add up points, etc)
         - change user name?
-        - start new game (json body with list of drops and points?)
-        - add submission
          */
+        environment.jersey().register(GetLeaderboardGamesResource(database))
+        environment.jersey().register(GetLeaderboardGameResource(database))
         environment.jersey().register(NewLeaderboardGameResource(database))
+        environment.jersey().register(AddSubmissionResource(database))
     }
 }

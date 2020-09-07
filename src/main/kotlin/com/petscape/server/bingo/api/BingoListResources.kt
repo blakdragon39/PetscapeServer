@@ -16,7 +16,7 @@ import javax.ws.rs.core.MediaType
 @Path("/bingo/all")
 @Produces(MediaType.APPLICATION_JSON)
 @PermitAll
-class ListAllGamesResource(private val db: MongoDatabase) {
+class ListAllBingoGamesResource(private val db: MongoDatabase) {
 
     @GET
     fun listAllGames(): List<LiteBingoGame> {
@@ -29,7 +29,7 @@ class ListAllGamesResource(private val db: MongoDatabase) {
 @Path("/bingo/players")
 @Produces(MediaType.APPLICATION_JSON)
 @PermitAll
-class ListAllPlayersResource(private val db: MongoDatabase) {
+class ListAllBingoPlayersResource(private val db: MongoDatabase) {
 
     @GET
     fun listAllPlayers(@QueryParam("game_id") @NotNull gameId: ObjectId): List<String?> {

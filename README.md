@@ -135,14 +135,28 @@ Get the winning cards from a game of bingo (one or more lines finished)
 - `image/png`
 
 
-# Leaderboard Enpoints
+# Leaderboard Endpoints
+
+
+## GET /leaderboard/all
+List all leaderboard games
+
+
+## GET /leaderboard/
+
+#### Parameters
+**game_id** (`mongo ObjectId`)  
+
+#### Returns
+- `Leaderboard Game` object
+
 
 ## POST /leaderboard/new_game
 
-#### Parameters
-**name** String
-**json body**
-- JSON body with a list of all boss/item combinations for this leaderboard, and their points  
+#### Parameters  
+**name** String  
+**json body**  
+- JSON body with a list of all boss/item combinations for this leaderboard, and their points    
 
 ```
 [
@@ -157,6 +171,20 @@ Get the winning cards from a game of bingo (one or more lines finished)
 
 #### Returns
 - `Leaderboard Game object`
+
+
+## POST /leaderboard/add_submission
+
+#### Parameters
+**game_id** (`mongo ObjectId`)  
+**username** String  
+**boss** String  
+**item** String  
+**proof** String  
+
+#### Returns
+- `Leaderboard Game` object
+
 
 # Models
 
