@@ -3,10 +3,14 @@ package com.petscape.server.api
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
 import com.petscape.server.models.BingoGameMongo
+import com.petscape.server.utils.getGame
+import org.bson.types.ObjectId
 import javax.annotation.security.PermitAll
+import javax.validation.constraints.NotNull
 import javax.ws.rs.GET
 import javax.ws.rs.Path
 import javax.ws.rs.Produces
+import javax.ws.rs.QueryParam
 import javax.ws.rs.core.MediaType
 
 @Path("/bingo/all")
@@ -19,6 +23,18 @@ class ListAllGamesResource(private val db: MongoDatabase) {
         val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
         return games.find().toList()
                 .map { LiteBingoGame(it.id.toString(), it.name ?: it.id.toString()) }
+    }
+}
+
+@Path("/bingo/players")
+@Produces(MediaType.APPLICATION_JSON)
+@PermitAll
+class ListAllPlayersResource(private val db: MongoDatabase) {
+
+    @GET
+    fun listAllPlayers(@QueryParam("game_id") @NotNull gameId: ObjectId): List<String?> {
+        val game = getGame(db, gameId)
+        return game.cards.map { it.username }
     }
 }
 

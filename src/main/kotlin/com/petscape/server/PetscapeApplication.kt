@@ -61,6 +61,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
         environment.jersey().register(AuthDynamicFeature(auth))
         environment.jersey().register(ListAllGamesResource(database))
+        environment.jersey().register(ListAllPlayersResource(database))
         environment.jersey().register(NewBingoGameResource(database))
         environment.jersey().register(NewCustomBingoGameResource(database))
         environment.jersey().register(AddBingoCardResource(database))
