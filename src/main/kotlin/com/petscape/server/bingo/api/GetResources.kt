@@ -5,8 +5,8 @@ import com.petscape.server.bingo.models.BingoCardModel
 import com.petscape.server.bingo.models.BingoCardMongo
 import com.petscape.server.bingo.models.BingoSquareMongo
 import com.petscape.server.utils.FileUtils
-import com.petscape.server.bingo.getCard
-import com.petscape.server.bingo.getGame
+import com.petscape.server.bingo.getBingoCard
+import com.petscape.server.bingo.getBingoGame
 import org.bson.types.ObjectId
 import java.awt.Color
 import java.awt.FontMetrics
@@ -30,7 +30,7 @@ class GetCardResource(private val db: MongoDatabase) {
     @GET
     fun getCard(@QueryParam("game_id") @NotNull gameId: ObjectId,
                 @QueryParam("username") @NotEmpty username: String): BingoCardModel {
-        val mongoCard = getCard(db, gameId, username)
+        val mongoCard = getBingoCard(db, gameId, username)
         return mongoCard.toModel()
     }
 }
@@ -48,7 +48,7 @@ class GetCardImageResource(private val db: MongoDatabase) {
     @GET
     fun getImage(@QueryParam("game_id") @NotNull gameId: ObjectId,
                  @QueryParam("username") @NotEmpty username: String): Response {
-        val card = getCard(db, gameId, username)
+        val card = getBingoCard(db, gameId, username)
         val imageData = generateImage(card)
 
         return Response.status(200)
@@ -215,7 +215,7 @@ class GetWinnersResource(private val db: MongoDatabase) {
 
     @GET
     fun getWinners(@QueryParam("game_id") @NotNull gameId: ObjectId): List<BingoCardModel> {
-        val game = getGame(db, gameId)
+        val game = getBingoGame(db, gameId)
         return game.winners().map { it.toModel() }
     }
 }

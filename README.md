@@ -1,4 +1,4 @@
-# Endpoints
+# Bingo Endpoints
 **Bold** parameters are required
 
 ## GET /bingo/all
@@ -135,6 +135,29 @@ Get the winning cards from a game of bingo (one or more lines finished)
 - `image/png`
 
 
+# Leaderboard Enpoints
+
+## POST /leaderboard/new_game
+
+#### Parameters
+**name** String
+**json body**
+- JSON body with a list of all boss/item combinations for this leaderboard, and their points  
+
+```
+[
+    {
+        "boss": String,
+        "item": String,
+        "points": Int
+    },
+    ....    
+]
+```
+
+#### Returns
+- `Leaderboard Game object`
+
 # Models
 
 ## Bingo Game
@@ -177,6 +200,36 @@ Get the winning cards from a game of bingo (one or more lines finished)
     "boss": Boss,
     "item": Drop
 }
+```
+
+## Leaderboard Game
+```
+{
+    "id": {mongo ObjectId},
+    "name": String,
+    "points": [
+        {Leaderboard Points},
+        ...
+    ],
+    "submissions": [
+        {Leaderboard Submission},
+        
+    ]
+}
+```
+
+## Leaderboard Points
+```
+    "boss": Boss,
+    "drop": Drop,
+    "points": Int
+```
+
+## Leaderboard Submission
+```
+    "username": String,
+    "proof": String,
+    "time": Long
 ```
 
 ## Boss

@@ -3,7 +3,7 @@ package com.petscape.server.bingo.api
 import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
 import com.petscape.server.bingo.models.BingoGameMongo
-import com.petscape.server.bingo.getGame
+import com.petscape.server.bingo.getBingoGame
 import org.bson.types.ObjectId
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotNull
@@ -33,7 +33,7 @@ class ListAllPlayersResource(private val db: MongoDatabase) {
 
     @GET
     fun listAllPlayers(@QueryParam("game_id") @NotNull gameId: ObjectId): List<String?> {
-        val game = getGame(db, gameId)
+        val game = getBingoGame(db, gameId)
         return game.cards.map { it.username }
     }
 }

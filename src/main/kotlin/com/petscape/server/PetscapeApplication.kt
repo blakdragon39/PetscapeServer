@@ -9,6 +9,7 @@ import com.petscape.server.auth.PetscapeAuthorizer
 import com.petscape.server.auth.User
 import com.petscape.server.health.HealthCheckResource
 import com.petscape.server.health.ResourcesHealthCheck
+import com.petscape.server.leaderboard.api.NewLeaderboardGameResource
 import io.dropwizard.Application
 import io.dropwizard.auth.AuthDynamicFeature
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter
@@ -22,6 +23,7 @@ import org.slf4j.LoggerFactory
 
 const val DB_PETSCAPE = "petscape_db"
 const val COLLECTION_BINGO_GAMES = "bingo_games"
+const val COLLECTION_LEADERBOARD_GAMES = "leaderboard_games"
 
 @Throws(Exception::class)
 fun main(args: Array<String>) {
@@ -74,5 +76,14 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(GetCardImageResource(database))
 
         //Leaderboard Resources
+        /*
+        TODO
+        - list leaderboard games
+        - show leaderboard state (add up points, etc)
+        - change user name?
+        - start new game (json body with list of drops and points?)
+        - add submission
+         */
+        environment.jersey().register(NewLeaderboardGameResource(database))
     }
 }

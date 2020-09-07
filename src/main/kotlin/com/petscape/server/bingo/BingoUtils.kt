@@ -16,13 +16,13 @@ import kotlin.random.Random
 const val BINGO_NUM_SQUARES = 25
 private const val FREE_SQUARE = 12
 
-fun getGame(db: MongoDatabase, gameId: ObjectId): BingoGameMongo {
+fun getBingoGame(db: MongoDatabase, gameId: ObjectId): BingoGameMongo {
     val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
     return games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
 }
 
-fun getCard(db: MongoDatabase, gameId: ObjectId, username: String): BingoCardMongo {
-    val game = getGame(db, gameId)
+fun getBingoCard(db: MongoDatabase, gameId: ObjectId, username: String): BingoCardMongo {
+    val game = getBingoGame(db, gameId)
     return game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
 }
 
