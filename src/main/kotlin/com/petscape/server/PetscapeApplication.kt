@@ -67,6 +67,9 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(HealthCheckResource(environment.healthChecks()))
 
         //Bingo Resources
+        /*
+        TODO change username?
+         */
         environment.jersey().register(ListAllBingoGamesResource(database))
         environment.jersey().register(ListAllBingoPlayersResource(database))
         environment.jersey().register(NewBingoGameResource(database))
@@ -80,8 +83,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
 
         //Leaderboard Resources
         /*
-        TODO
-        - change user name?
+        TODO change user name?
          */
         environment.jersey().register(GetLeaderboardGamesResource(database))
         environment.jersey().register(GetLeaderboardGameResource(database))

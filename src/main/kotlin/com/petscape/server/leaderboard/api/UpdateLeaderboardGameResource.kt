@@ -6,8 +6,6 @@ import com.petscape.server.leaderboard.getLeaderboardGame
 import com.petscape.server.leaderboard.models.LeaderboardGameModel
 import com.petscape.server.leaderboard.models.LeaderboardGameMongo
 import com.petscape.server.leaderboard.models.LeaderboardSubmissionMongo
-import com.petscape.server.models.Boss
-import com.petscape.server.models.Drop
 import org.bson.types.ObjectId
 import org.litote.kmongo.updateOneById
 import javax.annotation.security.PermitAll
@@ -32,12 +30,13 @@ class AddSubmissionResource(val db: MongoDatabase) {
     ): LeaderboardGameModel {
         val games = db.getCollection(COLLECTION_LEADERBOARD_GAMES, LeaderboardGameMongo::class.java)
         val game = getLeaderboardGame(db, gameId)
+        val points = game.points.firstOrNull { it.boss?.displayName == boss && it.drop?.item == item }
+            ?: throw WebApplicationException("$boss $item not found in this competition", Response.Status.BAD_REQUEST)
 
         val submission = LeaderboardSubmissionMongo()
         submission.username = username
-        //todo validate that boss/item are in game??
-        submission.boss = Boss.values().firstOrNull { it.displayName == boss } ?: throw WebApplicationException("Boss $boss not found", Response.Status.NOT_FOUND)
-        submission.drop = Drop.values().firstOrNull { it.item == item } ?: throw WebApplicationException("Item $item not found", Response.Status.NOT_FOUND)
+        submission.boss = points.boss
+        submission.drop = points.drop
         submission.proof = proof
 
         game.submissions.add(submission)
