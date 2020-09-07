@@ -11,7 +11,7 @@ class LeaderboardGameMongo {
     @BsonId var id = ObjectId()
     var name: String = ""
     var points: List<LeaderboardPointsMongo> = emptyList()
-    var submissions: List<LeaderboardSubmissionMongo> = emptyList()
+    var submissions: MutableList<LeaderboardSubmissionMongo> = mutableListOf()
 
     fun toModel(): LeaderboardGameModel = LeaderboardGameModel(this)
 }
@@ -39,6 +39,8 @@ class LeaderboardPointsModel(leaderboardPointsMongo: LeaderboardPointsMongo) {
 
 class LeaderboardSubmissionMongo {
     var username: String = ""
+    var boss: Boss? = null
+    var drop: Drop? = null
     var proof: String = ""
     var time: Long = System.currentTimeMillis()
 
@@ -47,6 +49,8 @@ class LeaderboardSubmissionMongo {
 
 class LeaderboardSubmissionModel(leaderboardSubmissionMongo: LeaderboardSubmissionMongo) {
     val username: String = leaderboardSubmissionMongo.username
+    val boss: BossModel? = leaderboardSubmissionMongo.boss?.toModel()
+    val drop: DropModel? = leaderboardSubmissionMongo.drop?.toModel()
     val proof: String = leaderboardSubmissionMongo.proof
     val time = leaderboardSubmissionMongo.time
 }

@@ -256,6 +256,8 @@ List all leaderboard games
 ## Leaderboard Submission
 ```
     "username": String,
+    "boss": Boss,
+    "drop": Drop,
     "proof": String,
     "time": Long
 ```
