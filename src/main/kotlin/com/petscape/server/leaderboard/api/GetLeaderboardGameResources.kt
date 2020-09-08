@@ -5,6 +5,7 @@ import com.petscape.server.COLLECTION_LEADERBOARD_GAMES
 import com.petscape.server.leaderboard.getLeaderboardGame
 import com.petscape.server.leaderboard.models.LeaderboardGameModel
 import com.petscape.server.leaderboard.models.LeaderboardGameMongo
+import com.petscape.server.models.GameId
 import org.bson.types.ObjectId
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotNull
@@ -19,9 +20,9 @@ import javax.ws.rs.core.MediaType
 @PermitAll
 class GetLeaderboardGamesResource(val db: MongoDatabase) {
     @GET
-    fun getAllGames(): List<LiteLeaderboardGame> {
+    fun getAllGames(): List<GameId> {
         val games = db.getCollection(COLLECTION_LEADERBOARD_GAMES, LeaderboardGameMongo::class.java)
-        return games.find().toList().map { LiteLeaderboardGame(it.id.toString(), it.name) }
+        return games.find().toList().map { GameId(it.id.toString(), it.name) }
     }
 }
 
@@ -34,6 +35,3 @@ class GetLeaderboardGameResource(val db: MongoDatabase) {
         return getLeaderboardGame(db, gameId).toModel()
     }
 }
-
-@Suppress("unused")
-class LiteLeaderboardGame(val id: String, val name: String)

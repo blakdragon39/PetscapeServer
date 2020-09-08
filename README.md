@@ -142,7 +142,7 @@ Get the winning cards from a game of bingo (one or more lines finished)
 List all leaderboard games
 
 
-## GET /leaderboard/
+## GET /leaderboard/get_game
 
 #### Parameters
 **game_id** (`mongo ObjectId`)  
@@ -170,7 +170,7 @@ List all leaderboard games
 ```
 
 #### Returns
-- `Leaderboard Game object`
+- `Leaderboard Game` object
 
 
 ## POST /leaderboard/add_submission

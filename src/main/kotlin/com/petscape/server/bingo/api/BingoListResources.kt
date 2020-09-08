@@ -4,6 +4,7 @@ import com.mongodb.client.MongoDatabase
 import com.petscape.server.COLLECTION_BINGO_GAMES
 import com.petscape.server.bingo.models.BingoGameMongo
 import com.petscape.server.bingo.getBingoGame
+import com.petscape.server.models.GameId
 import org.bson.types.ObjectId
 import javax.annotation.security.PermitAll
 import javax.validation.constraints.NotNull
@@ -19,10 +20,10 @@ import javax.ws.rs.core.MediaType
 class ListAllBingoGamesResource(private val db: MongoDatabase) {
 
     @GET
-    fun listAllGames(): List<LiteBingoGame> {
+    fun listAllGames(): List<GameId> {
         val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
         return games.find().toList()
-                .map { LiteBingoGame(it.id.toString(), it.name ?: it.id.toString()) }
+                .map { GameId(it.id.toString(), it.name ?: it.id.toString()) }
     }
 }
 
@@ -37,6 +38,3 @@ class ListAllBingoPlayersResource(private val db: MongoDatabase) {
         return game.cards.map { it.username }
     }
 }
-
-@Suppress("unused")
-class LiteBingoGame(val id: String, val name: String)
