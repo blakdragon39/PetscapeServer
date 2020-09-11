@@ -1,6 +1,5 @@
 package com.petscape.server
 
-import com.fasterxml.jackson.core.JsonParser
 import com.mongodb.MongoClientSettings
 import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
