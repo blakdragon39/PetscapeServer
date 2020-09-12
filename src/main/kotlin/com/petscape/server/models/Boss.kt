@@ -268,7 +268,7 @@ enum class Boss(
         )
     ),
     Scorpia(
-        displayName = "Scoripia",
+        displayName = "Scorpia",
         file = "scorpia.png",
         drops = listOf(
             Pair(MaledictionShard3, 256),
