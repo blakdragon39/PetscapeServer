@@ -19,7 +19,7 @@ fun getGame(db: MongoDatabase, gameId: ObjectId): BingoGameMongo {
 
 fun getCard(db: MongoDatabase, gameId: ObjectId, username: String): BingoCardMongo {
     val game = getGame(db, gameId)
-    return game.cards.find { it.username == username } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
+    return game.cards.find { it.username?.toLowerCase() == username.toLowerCase() } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
 }
 
 fun generateSquares(type: BingoGameType, freeSpace: Boolean): List<BingoSquareMongo> {

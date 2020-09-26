@@ -29,7 +29,7 @@ class AddBingoCardResource(private val db: MongoDatabase) {
 
         if (game == null) {
             throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
-        } else if (game.cards.any { it.username == username }) {
+        } else if (game.cards.any { it.username?.toLowerCase() == username.toLowerCase() }) {
             throw WebApplicationException("Card already exists for that user in this game", Response.Status.FORBIDDEN)
         }
 
