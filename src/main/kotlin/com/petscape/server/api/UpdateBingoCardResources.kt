@@ -34,6 +34,27 @@ class CompleteSquareResource(private val db: MongoDatabase) {
     }
 }
 
+@Path("/bingo/uncomplete_square")
+@Produces(MediaType.APPLICATION_JSON)
+@PermitAll
+class UncompleteSquareResource(private val db: MongoDatabase) {
+
+    @POST
+    fun updateBingoCard(@QueryParam("game_id") @NotNull gameId: ObjectId,
+                        @QueryParam("card_id") @NotNull cardId: ObjectId,
+                        @QueryParam("square_id") @NotNull squareId: ObjectId): BingoCardModel {
+
+        val games = db.getCollection(COLLECTION_BINGO_GAMES, BingoGameMongo::class.java)
+        val game = games.findOneById(gameId) ?: throw WebApplicationException("Game not found", Response.Status.NOT_FOUND)
+        val card = game.cards.find { it.id == cardId } ?: throw WebApplicationException("Card not found", Response.Status.NOT_FOUND)
+        val square = card.squares?.find { it.id == squareId } ?: throw WebApplicationException("Square not found", Response.Status.NOT_FOUND)
+        square.completed = false
+
+        games.replaceOneById(gameId, game)
+        return card.toModel()
+    }
+}
+
 @Path("/bingo/update_notes")
 @Produces(MediaType.APPLICATION_JSON)
 @PermitAll

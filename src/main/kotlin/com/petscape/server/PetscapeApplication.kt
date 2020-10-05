@@ -16,8 +16,6 @@ import io.dropwizard.setup.Bootstrap
 import io.dropwizard.setup.Environment
 import org.bson.codecs.configuration.CodecRegistries
 import org.bson.codecs.pojo.PojoCodecProvider
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 
 const val DB_PETSCAPE = "petscape_db"
@@ -30,7 +28,6 @@ fun main(args: Array<String>) {
 
 class PetscapeApplication : Application<PetscapeConfiguration>() {
 
-    private lateinit var logger: Logger
     private lateinit var database: MongoDatabase
 
     override fun getName(): String {
@@ -38,8 +35,6 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
     }
 
     override fun initialize(bootstrap: Bootstrap<PetscapeConfiguration?>) {
-        logger = LoggerFactory.getLogger(javaClass.name)
-
         val pojoCodecRegistry = CodecRegistries.fromRegistries(
             MongoClientSettings.getDefaultCodecRegistry(),
             CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build())
@@ -65,6 +60,7 @@ class PetscapeApplication : Application<PetscapeConfiguration>() {
         environment.jersey().register(NewCustomBingoGameResource(database))
         environment.jersey().register(AddBingoCardResource(database))
         environment.jersey().register(CompleteSquareResource(database))
+        environment.jersey().register(UncompleteSquareResource(database))
         environment.jersey().register(UpdateNotesResource(database))
         environment.jersey().register(GetWinnersResource(database))
         environment.jersey().register(GetCardResource(database))
